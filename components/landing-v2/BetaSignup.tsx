@@ -98,8 +98,14 @@ export function BetaSignup() {
         </span>
         <span className="text-lg font-bold">신청이 접수됐어요</span>
         <span className="text-center text-[14.5px] leading-[21px] text-[#6B7684]">
-          <b className="text-[#191F28]">{saved.email}</b> 주소로 {saved.platform}{" "}
-          참여 안내를 보내드릴게요.
+          {/* 완료 화면은 early return 하는 별개 JSX라 아래 폼에 붙인 마스킹이
+              여기까지 닿지 않는다. 그런데 하필 여기가 입력한 이메일을 그대로
+              찍는 유일한 자리다 — input 이 아니라 일반 텍스트여서 세션 녹화의
+              자동 보호(입력값 치환)도 받지 못한다. 주소만 따로 가린다 */}
+          <b className="text-[#191F28]" data-hj-suppress data-cs-mask>
+            {saved.email}
+          </b>{" "}
+          주소로 {saved.platform} 참여 안내를 보내드릴게요.
         </span>
         <button
           type="button"
