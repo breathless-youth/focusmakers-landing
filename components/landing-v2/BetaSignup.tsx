@@ -169,7 +169,15 @@ export function BetaSignup() {
           </span>
         </>
       ) : (
-        <form onSubmit={handleSubmit} noValidate className="flex flex-col gap-3">
+        // 세션 녹화에서 이 영역을 통째로 가린다. 태그가 Contentsquare 로
+        // 넘어갔지만 어느 쪽 리더가 붙든 걸리도록 두 속성을 다 붙인다
+        <form
+          onSubmit={handleSubmit}
+          noValidate
+          data-hj-suppress
+          data-cs-mask
+          className="flex flex-col gap-3"
+        >
           <div className="flex gap-2">
             <input
               id={emailId}

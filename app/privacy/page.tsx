@@ -210,6 +210,10 @@ export default function PrivacyPage() {
                 "Google LLC",
                 "웹사이트 이용 통계 분석(Google Analytics) / 미국",
               ],
+              [
+                "Hotjar Ltd. (Contentsquare 그룹)",
+                "웹사이트 이용 행태 분석(히트맵·세션 녹화) / 아일랜드",
+              ],
             ]}
           />
           <p>
@@ -241,6 +245,24 @@ export default function PrivacyPage() {
               ["보유 및 이용 기간", "수집일로부터 최대 14개월"],
             ]}
           />
+          <Table
+            rows={[
+              ["이전받는 자", "Hotjar Ltd. (Contentsquare 그룹)"],
+              ["이전 국가", "아일랜드(유럽연합)"],
+              [
+                "이전 항목",
+                "쿠키 및 유사 기술로 수집되는 온라인 식별자, 접속 IP 주소(마지막 옥텟을 가린 형태), 브라우저·기기 정보, 페이지 내 마우스 이동·클릭·스크롤 등 화면 조작 기록",
+              ],
+              ["이전 일시 및 방법", "웹사이트 접속 시 네트워크를 통해 자동 전송"],
+              ["이용 목적", "화면 구성 개선을 위한 이용 행태 분석"],
+              ["보유 및 이용 기간", "수집일로부터 최대 365일"],
+            ]}
+          />
+          <p className="rounded-lg border border-zinc-200 bg-zinc-50 p-4 font-medium text-zinc-800 dark:border-zinc-800 dark:bg-zinc-900 dark:text-zinc-200">
+            Hotjar 는 화면 조작 기록을 수집하지만, 이용자가 입력창에 적은
+            내용은 수집하지 않습니다. 베타 신청 폼은 별도 설정으로 화면
+            기록에서 가려지며, 입력한 이메일 주소는 전송되지 않습니다.
+          </p>
           <p>
             이 분석은 웹사이트(랜딩 페이지)에만 적용되며, 앱 이용 기록이나
             카메라 영상은 대상이 아닙니다. Google Analytics 수집을 원하지
@@ -253,7 +275,17 @@ export default function PrivacyPage() {
             >
               Google Analytics 차단 브라우저 부가기능
             </a>
-            을 설치하거나 브라우저에서 쿠키를 차단하실 수 있습니다.
+            을 설치하실 수 있고, Hotjar 수집을 원하지 않으시면{" "}
+            <a
+              href="https://www.hotjar.com/policies/do-not-track/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="underline underline-offset-2"
+            >
+              Hotjar 수집 거부(Do Not Track) 페이지
+            </a>
+            에서 거부하실 수 있습니다. 브라우저에서 쿠키를 차단하는 방법도
+            있습니다.
           </p>
         </Section>
 

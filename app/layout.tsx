@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import localFont from "next/font/local";
 import { GeistMono } from "geist/font/mono";
 import { GoogleAnalytics } from "@next/third-parties/google";
+import { Hotjar } from "@/components/landing-v2/Hotjar";
 import { SITE } from "@/lib/site";
 import { APP_DESCRIPTION } from "@/lib/content";
 import "./globals.css";
@@ -43,6 +44,9 @@ export default function RootLayout({
     >
       <body className="min-h-full flex flex-col">{children}</body>
       {analyticsEnabled && <GoogleAnalytics gaId={SITE.gaMeasurementId} />}
+      {analyticsEnabled && SITE.hotjarTagId && (
+        <Hotjar tagId={SITE.hotjarTagId} />
+      )}
     </html>
   );
 }
