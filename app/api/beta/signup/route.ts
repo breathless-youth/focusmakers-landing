@@ -59,7 +59,7 @@ export async function POST(request: Request) {
   const normalized = email.trim().toLowerCase();
 
   // 같은 이메일로 다시 신청해도 에러 대신 기존 신청을 그대로 둔다.
-  // onConflict 는 beta_testers_email_lower_key 인덱스를 탄다 —
+  // onConflict 는 email unique 제약을 탄다 —
   // ignoreDuplicates 라 먼저 들어온 create_time / state 가 덮이지 않는다.
   const { error } = await supabaseAdmin.from("beta_testers").upsert(
     {

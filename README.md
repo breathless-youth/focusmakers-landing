@@ -77,7 +77,9 @@ Vercel 에 넣을 때는 Production 과 Preview 양쪽에 넣어야 PR 프리뷰
 
 ## DB
 
-`supabase/migrations/0001_beta_testers.sql` 을 Supabase SQL Editor 에 붙여넣어 실행한다.
+`supabase/migrations/` 를 번호 순서대로 Supabase SQL Editor 에 붙여넣어 실행한다.
+새 DB 는 `0001` 만 실행하면 되고, `0002` 는 `0001` 초판을 이미 돌린 DB 를
+고치는 패치라 건너뛴다.
 
 `beta_testers` 는 RLS 를 켜고 정책을 하나도 만들지 않았다 — 브라우저에 나가는
 키로는 읽기도 쓰기도 안 되고, 서버 라우트가 secret 키로만 쓴다.

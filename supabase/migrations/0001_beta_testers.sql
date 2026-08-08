@@ -14,7 +14,12 @@ create table if not exists public.beta_testers (
   id uuid primary key default gen_random_uuid(),
   create_time timestamptz not null default now(),
 
-  email text not null,
+  -- 라우트가 항상 소문자로 정규화해 저장하므로 컬럼에 직접 unique 를 건다.
+  -- lower(email) 식 인덱스로 잡으면 ON CONFLICT 추론이 안 된다 —
+  -- PostgREST 의 on_conflict 는 컬럼명만 받아서 식을 지정할 방법이 없다(42P10).
+  -- 대소문자 섞인 값이 다른 경로로 들어오지 못하게 CHECK 로 막아,
+  -- unique(email) 이 unique(lower(email)) 과 같은 보장을 하게 한다.
+  email text not null unique check (email = lower(email)),
   -- 'android' | 'ios'. 체크로 묶어 오타가 들어오지 않게 한다
   platform text not null check (platform in ('android', 'ios')),
   -- 1차 모집 마감 후 들어온 신청(대기 명단)인지. lib/beta.tsx 의 BETA_CLOSED
@@ -29,11 +34,6 @@ create table if not exists public.beta_testers (
   referrer text,
   user_agent text
 );
-
--- 같은 이메일로 두 번 신청되지 않게 (대소문자 무시).
--- route.ts 의 upsert 가 이 인덱스를 탄다
-create unique index if not exists beta_testers_email_lower_key
-  on public.beta_testers (lower(email));
 
 -- 선착순 정렬과 상태별 조회
 create index if not exists beta_testers_create_time_idx
