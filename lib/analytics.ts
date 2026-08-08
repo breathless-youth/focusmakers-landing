@@ -44,7 +44,12 @@ export function trackPlatformSelect(
   track("platform_select", { platform, location });
 }
 
-/** 이메일 신청 완료 — Android 쪽 실질 전환 */
-export function trackBetaSignup(platform: Platform, isWaitlist: boolean) {
-  track("beta_signup", { platform, is_waitlist: isWaitlist });
+/**
+ * 이메일 신청 완료 — Android 쪽 실질 전환.
+ * iPhone 은 이메일 없이 testflight_open 으로 빠지므로 두 이벤트가 각 경로의
+ * 전환을 나눠 갖는다. 다만 모집이 마감되면(BETA_CLOSED) iPhone 도 이 폼을
+ * 쓰므로 platform 파라미터로 갈라 본다.
+ */
+export function trackEmailSignup(platform: Platform, isWaitlist: boolean) {
+  track("android_email_signup", { platform, is_waitlist: isWaitlist });
 }

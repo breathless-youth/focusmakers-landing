@@ -9,7 +9,7 @@ import {
   betaCopy,
   daysLeft,
 } from "@/lib/beta";
-import { trackBetaSignup, trackPlatformSelect, trackTestflightOpen } from "@/lib/analytics";
+import { trackEmailSignup, trackPlatformSelect, trackTestflightOpen } from "@/lib/analytics";
 import { useBeta } from "./BetaContext";
 import { Confetti } from "./Confetti";
 
@@ -98,7 +98,7 @@ export function BetaSignup() {
       email: value,
       platform: ios ? "iPhone(TestFlight)" : "Android(Google Play)",
     });
-    trackBetaSignup(platform, BETA_CLOSED);
+    trackEmailSignup(platform, BETA_CLOSED);
   }
 
   if (status === "done" && saved) {
