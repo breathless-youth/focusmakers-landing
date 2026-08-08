@@ -117,7 +117,11 @@ function FeatureRow({
           ))}
         </div>
       </div>
-      <div className={`flex justify-center ${reverse ? "md:order-1" : ""}`}>
+      {/* min-w-0 이 없으면 그리드 아이템 기본값(min-width:auto)이라 칸이 목업의
+          자연 폭 아래로 줄지 않는다. SessionPhones 는 바로 이 칸을 재서 축소
+          비율을 정하므로, 칸이 안 줄면 측정값도 안 줄어 좁은 화면에서 가로
+          스크롤이 남는다 — 줄이는 쪽으로 순환이 끊기지 않는다 */}
+      <div className={`flex min-w-0 justify-center ${reverse ? "md:order-1" : ""}`}>
         {children}
       </div>
     </Reveal>
