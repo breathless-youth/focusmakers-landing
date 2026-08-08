@@ -58,24 +58,30 @@ export async function POST(request: Request) {
 
   const normalized = email.trim().toLowerCase();
 
-  // 같은 이메일로 다시 신청해도 에러 대신 기존 신청을 그대로 둔다.
-  // onConflict 는 email unique 제약을 탄다 —
-  // ignoreDuplicates 라 먼저 들어온 create_time / state 가 덮이지 않는다.
-  const { error } = await supabaseAdmin.from("beta_testers").upsert(
-    {
-      email: normalized,
-      platform: platform as Platform,
-      is_waitlisted: BETA_CLOSED,
-      referrer: request.headers.get("referer"),
-      user_agent: request.headers.get("user-agent"),
-    },
-    { onConflict: "email", ignoreDuplicates: true },
-  );
+  // 같은 이메일로 다시 신청해도 에러 대신 접수된 것으로 본다.
+  //
+  // upsert + onConflict 대신 insert 로 넣고 23505(unique 위반)를 성공으로
+  // 처리한다. onConflict 는 Postgres 가 제약을 "추론"해야 해서, 제약 이름이나
+  // 형태가 조금만 어긋나도 42P10 으로 터진다 — 어차피 갱신할 필드가 없는
+  // 멱등 삽입이라 추론에 기댈 이유가 없다.
+  const { error } = await supabaseAdmin.from("beta_testers").insert({
+    email: normalized,
+    platform: platform as Platform,
+    is_waitlisted: BETA_CLOSED,
+    referrer: request.headers.get("referer"),
+    user_agent: request.headers.get("user-agent"),
+  });
 
-  if (error) {
+  // 23505 = unique 위반. 이미 신청한 이메일이므로 먼저 들어온 기록을 살려 둔다
+  const alreadySignedUp = error?.code === "23505";
+
+  if (error && !alreadySignedUp) {
     console.error("[beta/signup] insert 실패", error);
     return bad("신청을 저장하지 못했어요. 잠시 후 다시 시도해 주세요.", 500);
   }
+
+  // 중복 신청은 이미 알린 건이라 다시 알리지 않는다
+  if (alreadySignedUp) return NextResponse.json({ ok: true });
 
   // 몇 번째 신청인지 — 알림 문구에만 쓰므로 실패해도 접수를 막지 않는다
   const { count } = await supabaseAdmin
