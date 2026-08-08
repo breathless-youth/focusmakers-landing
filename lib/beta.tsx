@@ -219,7 +219,7 @@ export const BETA_FAQS: { q: string; a: string }[] = [
  *  iPhone 은 늘 App Store 로 가므로 주 CTA 문구는 여기서 갈리지 않는다 */
 export function betaCopy(closed = ANDROID_BETA_CLOSED) {
   return {
-    headerCta: "앱 받기",
+    headerCta: "무료로 시작",
     heroCta: "App Store에서 무료로 받기",
     /** 히어로 주 CTA 아래 보조 링크 — Android 신청 폼으로 보낸다 */
     heroSubCta: closed

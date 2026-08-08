@@ -8,6 +8,7 @@ import { BetaSignup } from "@/components/landing-v2/BetaSignup";
 import { CountUp } from "@/components/landing-v2/CountUp";
 import { CtaLink } from "@/components/landing-v2/CtaLink";
 import { FaqAccordion } from "@/components/landing-v2/FaqAccordion";
+import { HeaderCta } from "@/components/landing-v2/HeaderCta";
 import { RecordsPhone, ResultPhone } from "@/components/landing-v2/PhoneMockups";
 import { PlatformGuide } from "@/components/landing-v2/PlatformGuide";
 import { Reveal } from "@/components/landing-v2/Reveal";
@@ -32,8 +33,10 @@ export const metadata: Metadata = {
     "카메라가 공부를 인식해, 집중하는 동안만 타이머가 흐르는 공부 타이머 포메. 순공시간과 집중률이 자동으로 기록돼요. iPhone은 App Store에서 바로 받고, Android는 베타 테스터로 참여할 수 있어요.",
 };
 
-const NAV = [
-  { href: "#how", label: "참여 방법" },
+/** narrowHidden: 340px 아래에서는 CTA 버튼이 들어갈 자리가 모자란다.
+ *  로고 옆 "포메"를 좁은 화면에서 숨기는 것과 같은 이유로 이 항목을 접는다 */
+const NAV: { href: string; label: string; narrowHidden?: boolean }[] = [
+  { href: "#how", label: "참여 방법", narrowHidden: true },
   { href: "#faq", label: "FAQ" },
 ];
 
@@ -154,19 +157,14 @@ export default function Home() {
                 <a
                   key={n.href}
                   href={n.href}
-                  className="text-sm font-medium whitespace-nowrap text-[#6B7684] transition-colors hover:text-[#1B64DA]"
+                  className={`text-sm font-medium whitespace-nowrap text-[#6B7684] transition-colors hover:text-[#1B64DA] ${
+                    n.narrowHidden ? "max-[339px]:hidden" : ""
+                  }`}
                 >
                   {n.label}
                 </a>
               ))}
-              <CtaLink
-                href="#apply"
-                location="header"
-                label="header_cta"
-                className="flex h-[38px] items-center rounded-[13px] bg-[#1B64DA] px-3 text-[13.5px] font-bold whitespace-nowrap text-white transition-colors hover:bg-[#1957C2] active:scale-[.97] md:h-[42px] md:px-[18px] md:text-[14.5px]"
-              >
-                {copy.headerCta}
-              </CtaLink>
+              <HeaderCta />
             </div>
           </div>
         </header>
