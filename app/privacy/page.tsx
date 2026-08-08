@@ -206,6 +206,10 @@ export default function PrivacyPage() {
                 "Amazon Web Services, Inc.",
                 "서버 운영 및 데이터 보관 / 대한민국(아시아 태평양 서울 리전)",
               ],
+              [
+                "Google LLC",
+                "웹사이트 이용 통계 분석(Google Analytics) / 미국",
+              ],
             ]}
           />
           <p>
@@ -216,11 +220,40 @@ export default function PrivacyPage() {
         </Section>
 
         <Section no={8} title="개인정보의 국외 이전">
-          <p>서비스는 개인정보를 국외로 이전하지 않습니다.</p>
           <p>
-            서비스가 수집한 정보는 Amazon Web Services의 대한민국 서울
-            리전(ap-northeast-2)에 보관되며, 국외의 서버로 이전되거나 저장되지
-            않습니다.
+            앱이 수집한 정보는 Amazon Web Services의 대한민국 서울
+            리전(ap-northeast-2)에 보관되며, 국외로 이전되지 않습니다.
+          </p>
+          <p>
+            다만 웹사이트 이용 통계 분석을 위해 아래와 같이 정보가 국외로
+            이전됩니다.
+          </p>
+          <Table
+            rows={[
+              ["이전받는 자", "Google LLC"],
+              ["이전 국가", "미국"],
+              [
+                "이전 항목",
+                "쿠키 및 유사 기술로 수집되는 온라인 식별자, 접속 IP 주소(마지막 옥텟을 가린 형태), 브라우저·기기 정보, 방문 페이지와 이용 기록",
+              ],
+              ["이전 일시 및 방법", "웹사이트 접속 시 네트워크를 통해 자동 전송"],
+              ["이용 목적", "웹사이트 이용 현황 분석 및 서비스 개선"],
+              ["보유 및 이용 기간", "수집일로부터 최대 14개월"],
+            ]}
+          />
+          <p>
+            이 분석은 웹사이트(랜딩 페이지)에만 적용되며, 앱 이용 기록이나
+            카메라 영상은 대상이 아닙니다. Google Analytics 수집을 원하지
+            않으시면{" "}
+            <a
+              href="https://tools.google.com/dlpage/gaoptout"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="underline underline-offset-2"
+            >
+              Google Analytics 차단 브라우저 부가기능
+            </a>
+            을 설치하거나 브라우저에서 쿠키를 차단하실 수 있습니다.
           </p>
         </Section>
 
