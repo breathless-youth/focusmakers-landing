@@ -183,12 +183,9 @@ export const HOW_STEPS: Record<Platform, { title: string; desc: string }[]> = {
 };
 
 /** 메인 랜딩 FAQ.
- *  설치 방법과 요금은 iPhone / Android 가 서로 달라 기기별로 나눠 답한다 */
+ *  요금과 참여 방법은 iPhone / Android 가 서로 달라 기기별로 나눠 답한다.
+ *  iPhone 설치 방법은 히어로 CTA 와 참여 방법 섹션에서 이미 답이 끝난다 */
 export const BETA_FAQS: { q: string; a: string }[] = [
-  {
-    q: "iPhone에서는 어떻게 시작하나요?",
-    a: "App Store에 정식 출시돼 있어 바로 내려받을 수 있습니다. 회원가입 없이 앱을 열고 타이머를 켜면 순공시간이 측정됩니다.",
-  },
   {
     q: "iPhone에서도 무료인가요?",
     a: "네, 무료로 내려받아 사용할 수 있습니다. 소셜 스터디와 집중 리포트 등 프리미엄 기능은 준비되는 대로 따로 안내드립니다.",

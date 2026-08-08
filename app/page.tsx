@@ -330,7 +330,7 @@ export default function Home() {
             {/* 소셜 스터디 — 출시 예정 */}
             <Reveal className="mx-auto mt-8 flex max-w-[920px] flex-wrap items-center justify-center gap-8 rounded-[40px] bg-[#101419] px-7 py-10 md:gap-[72px] md:px-16 md:py-16">
               <div className="flex min-w-0 flex-1 basis-[340px] flex-col items-start gap-4">
-                <span className="rounded-full px-3.5 py-1.5 text-[13px] font-semibold text-[#64A8FF] shadow-[inset_0_0_0_1px_rgba(49,130,246,.55)]">
+                <span className="rounded-full px-[18px] py-2 text-[15px] font-semibold text-[#64A8FF] shadow-[inset_0_0_0_1px_rgba(49,130,246,.55)]">
                   출시 예정
                 </span>
                 <h2 className="text-[28px] font-bold tracking-[-0.8px] text-white md:text-[38px]">
