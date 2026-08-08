@@ -19,11 +19,18 @@ export const BETA_SEATS = 80;
 
 export type Platform = "ios" | "android";
 
-/** 히어로 하단 지표 3종 */
-export const HERO_STATS: { label: string; value: string; accent?: boolean }[] = [
+/** 히어로 하단 지표 3종.
+ *  countUp 은 뷰포트 진입 시 0부터 세어 올릴 값 — 총 공부시간은 "앉아있던
+ *  시간"이라 강조 대상이 아니어서 그대로 둔다. */
+export const HERO_STATS: {
+  label: string;
+  value: string;
+  accent?: boolean;
+  countUp?: boolean;
+}[] = [
   { label: "총 공부시간", value: "6h 24m" },
-  { label: "집중시간", value: "4h 52m", accent: true },
-  { label: "집중률", value: "76%" },
+  { label: "집중시간", value: "4h 52m", accent: true, countUp: true },
+  { label: "집중률", value: "76%", countUp: true },
 ];
 
 /** 기능별 화면 섹션의 카피. 목업은 페이지에서 직접 조립한다 */

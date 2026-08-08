@@ -5,6 +5,7 @@ import { CaretDownIcon } from "@phosphor-icons/react/dist/ssr";
 import { BackToTop } from "@/components/landing-v2/BackToTop";
 import { BetaProvider } from "@/components/landing-v2/BetaContext";
 import { BetaSignup } from "@/components/landing-v2/BetaSignup";
+import { CountUp } from "@/components/landing-v2/CountUp";
 import { FaqAccordion } from "@/components/landing-v2/FaqAccordion";
 import { RecordsPhone, ResultPhone } from "@/components/landing-v2/PhoneMockups";
 import { PlatformGuide } from "@/components/landing-v2/PlatformGuide";
@@ -205,7 +206,7 @@ export default function Home() {
                           : "text-[22px] font-bold tracking-[-0.5px] md:text-[30px]"
                       }`}
                     >
-                      {s.value}
+                      {s.countUp ? <CountUp value={s.value} /> : s.value}
                     </dd>
                     <dt className="text-[12.5px] text-[#8B95A1]">{s.label}</dt>
                   </div>
@@ -228,7 +229,7 @@ export default function Home() {
                 </span>
                 <CaretDownIcon size={16} className="text-[#8B95A1]" />
                 <span className="text-[42px] font-extrabold tracking-[-1.5px] text-[#1B64DA] tabular-nums md:text-[60px]">
-                  5h 37m
+                  <CountUp value="5h 37m" />
                 </span>
                 <span className="text-[13px] font-semibold text-[#1B64DA]">
                   실제 집중시간
