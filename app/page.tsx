@@ -6,6 +6,7 @@ import { BackToTop } from "@/components/landing-v2/BackToTop";
 import { BetaProvider } from "@/components/landing-v2/BetaContext";
 import { BetaSignup } from "@/components/landing-v2/BetaSignup";
 import { CountUp } from "@/components/landing-v2/CountUp";
+import { CtaLink } from "@/components/landing-v2/CtaLink";
 import { FaqAccordion } from "@/components/landing-v2/FaqAccordion";
 import { RecordsPhone, ResultPhone } from "@/components/landing-v2/PhoneMockups";
 import { PlatformGuide } from "@/components/landing-v2/PlatformGuide";
@@ -153,12 +154,14 @@ export default function Home() {
                   {n.label}
                 </a>
               ))}
-              <a
+              <CtaLink
                 href="#apply"
+                location="header"
+                label="header_cta"
                 className="flex h-[38px] items-center rounded-[13px] bg-[#1B64DA] px-3 text-[13.5px] font-bold whitespace-nowrap text-white transition-colors hover:bg-[#1957C2] active:scale-[.97] md:h-[42px] md:px-[18px] md:text-[14.5px]"
               >
                 {copy.headerCta}
-              </a>
+              </CtaLink>
             </div>
           </div>
         </header>
@@ -185,12 +188,14 @@ export default function Home() {
                 <br />더 나은 공부 습관을 만들어보세요.
               </p>
               <div className="flex flex-col items-center gap-2.5">
-                <a
+                <CtaLink
                   href="#apply"
+                  location="hero"
+                  label="hero_cta"
                   className="flex h-14 items-center rounded-2xl bg-[#1B64DA] px-[30px] text-[17px] font-bold text-white shadow-[0_6px_18px_rgba(27,100,218,.28)] transition-colors hover:bg-[#1957C2] active:scale-[.97]"
                 >
                   {copy.heroCta}
-                </a>
+                </CtaLink>
                 <span className="text-[13px] text-[#8B95A1]">
                   회원가입 없이 바로 체험 · 무료 베타
                 </span>

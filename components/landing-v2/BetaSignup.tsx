@@ -9,6 +9,7 @@ import {
   betaCopy,
   daysLeft,
 } from "@/lib/beta";
+import { trackBetaSignup, trackPlatformSelect, trackTestflightOpen } from "@/lib/analytics";
 import { useBeta } from "./BetaContext";
 import { Confetti } from "./Confetti";
 
@@ -97,6 +98,7 @@ export function BetaSignup() {
       email: value,
       platform: ios ? "iPhone(TestFlight)" : "Android(Google Play)",
     });
+    trackBetaSignup(platform, BETA_CLOSED);
   }
 
   if (status === "done" && saved) {
@@ -137,7 +139,10 @@ export function BetaSignup() {
             key={p}
             type="button"
             aria-pressed={platform === p}
-            onClick={() => setPlatform(p)}
+            onClick={() => {
+              setPlatform(p);
+              trackPlatformSelect(p, "apply");
+            }}
             className={`${PILL} ${platform === p ? PILL_ON : PILL_OFF}`}
           >
             {p === "ios" ? "iPhone" : "Android"}
@@ -151,6 +156,7 @@ export function BetaSignup() {
             href={TESTFLIGHT_URL}
             target="_blank"
             rel="noopener noreferrer"
+            onClick={() => trackTestflightOpen("apply")}
             className={`${CTA} h-[54px] text-[16.5px]`}
           >
             TestFlight에서 바로 체험하기

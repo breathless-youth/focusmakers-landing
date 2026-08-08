@@ -1,6 +1,11 @@
 "use client";
 
 import { BETA_CLOSED, HOW_STEPS, TESTFLIGHT_URL } from "@/lib/beta";
+import {
+  trackCtaClick,
+  trackPlatformSelect,
+  trackTestflightOpen,
+} from "@/lib/analytics";
 import { useBeta } from "./BetaContext";
 
 /**
@@ -29,7 +34,10 @@ export function PlatformGuide() {
             key={p}
             type="button"
             aria-pressed={platform === p}
-            onClick={() => setPlatform(p)}
+            onClick={() => {
+              setPlatform(p);
+              trackPlatformSelect(p, "how");
+            }}
             className={`${TAB} ${platform === p ? TAB_ON : TAB_OFF}`}
           >
             {p === "ios" ? "iPhone" : "Android"}
@@ -71,6 +79,7 @@ export function PlatformGuide() {
             href={TESTFLIGHT_URL}
             target="_blank"
             rel="noopener noreferrer"
+            onClick={() => trackTestflightOpen("how")}
             className="mt-1.5 flex h-[52px] w-full items-center justify-center rounded-[14px] bg-[#1B64DA] text-[15px] font-bold text-white shadow-[0_6px_18px_rgba(27,100,218,.28)] transition-colors hover:bg-[#1957C2] active:scale-[.97]"
           >
             TestFlight에서 바로 설치하기
@@ -78,6 +87,7 @@ export function PlatformGuide() {
         ) : (
           <a
             href="#apply"
+            onClick={() => trackCtaClick("how", "how_email_signup")}
             className="mt-1.5 flex h-[52px] w-full items-center justify-center rounded-[14px] bg-[#1B64DA] text-[15px] font-bold text-white shadow-[0_6px_18px_rgba(27,100,218,.28)] transition-colors hover:bg-[#1957C2] active:scale-[.97]"
           >
             이메일로 테스터 등록하기
