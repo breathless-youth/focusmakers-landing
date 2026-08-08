@@ -1,24 +1,19 @@
 "use client";
 
-import { useId, useState, useSyncExternalStore } from "react";
+import { useId, useState } from "react";
 import { CheckIcon } from "@phosphor-icons/react";
-import {
-  BETA_CLOSED,
-  BETA_SEATS,
-  TESTFLIGHT_URL,
-  betaCopy,
-  daysLeft,
-} from "@/lib/beta";
-import { trackEmailSignup, trackPlatformSelect, trackTestflightOpen } from "@/lib/analytics";
+import { ANDROID_BETA_CLOSED, BETA_SEATS, betaCopy } from "@/lib/beta";
+import { trackEmailSignup, trackPlatformSelect } from "@/lib/analytics";
 import { useBeta } from "./BetaContext";
 import { Confetti } from "./Confetti";
+import { StoreLink } from "./StoreLink";
 
 /**
  * 최종 CTA의 베타 신청 카드.
  *
- * iPhone은 이메일 없이 TestFlight 링크로 바로 보내고, Android(와 모집 마감 후
- * 전 기기)는 이메일을 받는다. 저장은 브라우저가 직접 하지 않고
- * 저장은 /api/beta/signup 이 맡는다 — 서버에서 이메일을 다시 검증하고
+ * iPhone은 정식 출시라 이메일 없이 App Store로 바로 보낸다. 이메일 폼은 Android
+ * 전용이고, 그래서 선착순 문구도 폼 안에만 있다. 저장은 브라우저가 직접 하지
+ * 않고 /api/beta/signup 이 맡는다 — 서버에서 이메일을 다시 검증하고
  * 레이트리밋을 걸기 위해서다.
  */
 
@@ -30,10 +25,6 @@ const PILL_OFF = "bg-white text-[#6B7684] shadow-[inset_0_0_0_1px_#E5E8EB]";
 
 const CTA =
   "flex items-center justify-center rounded-[14px] bg-[#1B64DA] font-bold text-white shadow-[0_6px_18px_rgba(27,100,218,.28)] transition-colors hover:bg-[#1957C2] active:scale-[.97]";
-
-/** 남은 일수는 날짜가 바뀔 때만 달라져 구독할 것이 없다 */
-const noopSubscribe = () => () => {};
-const serverDday = () => null;
 
 export function BetaSignup() {
   const emailId = useId();
@@ -48,13 +39,9 @@ export function BetaSignup() {
     null,
   );
 
-  // 마감까지 남은 일수는 서버/클라이언트 시각이 갈릴 수 있어 클라이언트에서만 읽는다
-  const dday = useSyncExternalStore(noopSubscribe, daysLeft, serverDday);
-
   const copy = betaCopy();
+  /** iPhone은 늘 App Store 직행 — 아래 폼은 Android 만 본다 */
   const ios = platform === "ios";
-  /** iPhone은 모집 중일 때만 링크 직행. 그 외에는 전부 이메일 신청 */
-  const direct = ios && !BETA_CLOSED;
 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -94,11 +81,9 @@ export function BetaSignup() {
     }
 
     setStatus("done");
-    setSaved({
-      email: value,
-      platform: ios ? "iPhone(TestFlight)" : "Android(Google Play)",
-    });
-    trackEmailSignup(platform, BETA_CLOSED);
+    // 이 폼은 Android 에만 열린다
+    setSaved({ email: value, platform: "Android(Google Play)" });
+    trackEmailSignup(platform, ANDROID_BETA_CLOSED);
   }
 
   if (status === "done" && saved) {
@@ -153,22 +138,16 @@ export function BetaSignup() {
         ))}
       </div>
 
-      {direct ? (
+      {ios ? (
         <>
-          <a
-            href={TESTFLIGHT_URL}
-            target="_blank"
-            rel="noopener noreferrer"
-            onClick={() => trackTestflightOpen("apply")}
+          <StoreLink
+            location="apply"
             className={`${CTA} h-[54px] text-[16.5px]`}
           >
-            TestFlight에서 바로 체험하기
-          </a>
+            App Store에서 무료로 받기
+          </StoreLink>
           <span className="text-center text-[12.5px] text-[#8B95A1]">
-            이메일 신청 없이 링크로 바로 설치돼요 · 선착순 {BETA_SEATS}명
-          </span>
-          <span className="text-center text-[12.5px] text-[#8B95A1]">
-            베타 기간 동안 무료로 사용할 수 있습니다.
+            지금은 모든 기능을 무료로 사용할 수 있습니다.
           </span>
         </>
       ) : (
@@ -236,9 +215,9 @@ export function BetaSignup() {
           </label>
 
           <span className="text-center text-[12.5px] text-[#8B95A1]">
-            {BETA_CLOSED
+            {ANDROID_BETA_CLOSED
               ? "1차 모집이 마감돼 대기 명단으로 등록돼요"
-              : `선착순 ${BETA_SEATS}명${dday === null ? "" : ` · 마감까지 D-${dday}`} · 신청 즉시 안내 메일을 보내드려요`}
+              : `선착순 ${BETA_SEATS}명 · 신청 즉시 안내 메일을 보내드려요`}
           </span>
         </form>
       )}

@@ -1,16 +1,14 @@
 "use client";
 
-import { BETA_CLOSED, HOW_STEPS, TESTFLIGHT_URL } from "@/lib/beta";
-import {
-  trackCtaClick,
-  trackPlatformSelect,
-  trackTestflightOpen,
-} from "@/lib/analytics";
+import { HOW_STEPS } from "@/lib/beta";
+import { trackCtaClick, trackPlatformSelect } from "@/lib/analytics";
 import { useBeta } from "./BetaContext";
+import { StoreLink } from "./StoreLink";
 
 /**
  * "참여 방법" 섹션 — iPhone / Android 탭과 기기별 3단계 안내.
- * iPhone은 TestFlight 링크로 바로, Android는 신청 폼으로 넘긴다.
+ * iPhone은 App Store로 바로, Android는 신청 폼으로 넘긴다.
+ * iOS 는 정식 출시라 Android 모집 상태와 무관하게 늘 스토어 버튼을 띄운다.
  */
 
 const TAB =
@@ -77,16 +75,13 @@ export function PlatformGuide() {
           </div>
         ))}
 
-        {ios && !BETA_CLOSED ? (
-          <a
-            href={TESTFLIGHT_URL}
-            target="_blank"
-            rel="noopener noreferrer"
-            onClick={() => trackTestflightOpen("how")}
+        {ios ? (
+          <StoreLink
+            location="how"
             className="mt-1.5 flex h-[52px] w-full items-center justify-center rounded-[14px] bg-[#1B64DA] text-[15px] font-bold text-white shadow-[0_6px_18px_rgba(27,100,218,.28)] transition-colors hover:bg-[#1957C2] active:scale-[.97]"
           >
-            TestFlight에서 바로 설치하기
-          </a>
+            App Store에서 무료로 받기
+          </StoreLink>
         ) : (
           <a
             href="#apply"

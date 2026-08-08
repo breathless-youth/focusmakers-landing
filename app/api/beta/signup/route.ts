@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { BETA_CLOSED, type Platform } from "@/lib/beta";
+import { ANDROID_BETA_CLOSED, type Platform } from "@/lib/beta";
 import { notifySignup } from "@/lib/notify";
 import { clientIp, rateLimit } from "@/lib/rate-limit";
 import { supabaseAdmin } from "@/lib/supabase-admin";
@@ -67,7 +67,7 @@ export async function POST(request: Request) {
   const { error } = await supabaseAdmin.from("beta_testers").insert({
     email: normalized,
     platform: platform as Platform,
-    is_waitlisted: BETA_CLOSED,
+    is_waitlisted: ANDROID_BETA_CLOSED,
     referrer: request.headers.get("referer"),
     user_agent: request.headers.get("user-agent"),
   });
@@ -91,7 +91,7 @@ export async function POST(request: Request) {
   await notifySignup({
     email: normalized,
     platform: platform as Platform,
-    isWaitlist: BETA_CLOSED,
+    isWaitlist: ANDROID_BETA_CLOSED,
     seatNo: count ?? null,
   });
 

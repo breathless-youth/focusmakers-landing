@@ -15,6 +15,7 @@ import {
   SessionPhones,
   SimpleModePhone,
 } from "@/components/landing-v2/SessionPhones";
+import { StoreLink } from "@/components/landing-v2/StoreLink";
 import {
   BENEFITS,
   BETA_FAQS,
@@ -28,7 +29,7 @@ import { SITE } from "@/lib/site";
 
 export const metadata: Metadata = {
   description:
-    "카메라가 공부를 인식해, 집중하는 동안만 타이머가 흐르는 공부 타이머 포메. 순공시간과 집중률이 자동으로 기록돼요. 베타 기간 동안 전 기능 무료로 체험할 수 있어요.",
+    "카메라가 공부를 인식해, 집중하는 동안만 타이머가 흐르는 공부 타이머 포메. 순공시간과 집중률이 자동으로 기록돼요. iPhone은 App Store에서 바로 받고, Android는 베타 테스터로 참여할 수 있어요.",
 };
 
 const NAV = [
@@ -192,17 +193,21 @@ export default function Home() {
                 <br />더 나은 공부 습관을 만들어보세요.
               </p>
               <div className="flex flex-col items-center gap-2.5">
-                <CtaLink
-                  href="#apply"
+                <StoreLink
                   location="hero"
-                  label="hero_cta"
                   className="flex h-14 items-center rounded-2xl bg-[#1B64DA] px-[30px] text-[17px] font-bold text-white shadow-[0_6px_18px_rgba(27,100,218,.28)] transition-colors hover:bg-[#1957C2] active:scale-[.97]"
                 >
                   {copy.heroCta}
+                </StoreLink>
+                {/* Android 는 아직 공개 스토어 주소가 없어 신청 폼으로 보낸다 */}
+                <CtaLink
+                  href="#apply"
+                  location="hero"
+                  label="hero_android_cta"
+                  className="mt-1 text-[13.5px] font-semibold text-[#1B64DA] underline decoration-[#1B64DA]/40 underline-offset-4 transition-colors hover:decoration-[#1B64DA]"
+                >
+                  {copy.heroSubCta}
                 </CtaLink>
-                <span className="text-[13px] text-[#8B95A1]">
-                  회원가입 없이 바로 체험 · 무료 베타
-                </span>
               </div>
 
               <dl className="mt-6 grid w-full max-w-[640px] grid-cols-3 gap-4 border-t border-[#EFF1F3] pt-7">
@@ -263,7 +268,7 @@ export default function Home() {
                   집중한 시간은 자동으로 기록됩니다.
                 </h2>
                 <p className="text-base break-keep text-[#6B7684]">
-                  베타 버전 화면 그대로 가져왔어요.
+                  실제 앱 화면 그대로 가져왔어요.
                 </p>
               </Reveal>
 
@@ -297,7 +302,7 @@ export default function Home() {
                   나의 공부 습관이 보입니다.
                 </h2>
                 <span className="rounded-full bg-[#E8F3FF] px-3 py-1 text-xs font-semibold text-[#1B64DA]">
-                  집중 리포트 · 정식 출시 후 제공
+                  집중 리포트 · 출시 예정
                 </span>
               </div>
               <dl className="m-0 rounded-[20px] bg-[#F9FAFB] px-[22px] py-1.5 shadow-[inset_0_0_0_1px_#E5E8EB]">
@@ -337,7 +342,7 @@ export default function Home() {
                   연구로 입증된 &lsquo;바디 더블링&rsquo; 효과로 함께 순공시간을
                   늘려요.
                   <br />
-                  베타 이용자에게 가장 먼저 열어드려요.
+                  지금 시작하신 분들께 가장 먼저 열어드려요.
                 </p>
               </div>
               <div className="flex-none">
@@ -362,7 +367,7 @@ export default function Home() {
           >
             <Reveal className="mx-auto flex max-w-[960px] flex-col gap-8">
               <h2 className="text-center text-[26px] font-bold tracking-[-0.5px] break-keep md:text-[34px]">
-                베타 서비스 이용자를 위한 혜택
+                지금 시작하는 분들을 위한 혜택
               </h2>
               <div className="mt-2 grid gap-y-8 md:grid-cols-3">
                 {BENEFITS.map((b) => (
@@ -405,10 +410,10 @@ export default function Home() {
             <Reveal className="mx-auto flex max-w-[960px] flex-col gap-9">
               <div className="flex flex-col items-center gap-2.5 text-center">
                 <h2 className="text-[26px] font-bold tracking-[-0.5px] break-keep md:text-[34px]">
-                  아래 안내에 따라 체험하실 수 있습니다.
+                  바로 사용해보세요.
                 </h2>
                 <p className="text-base break-keep text-[#6B7684]">
-                  iPhone은 링크로 바로, Android는 이메일 신청 후 초대를 받아요.
+                  Android는 베타 테스터 등록 후 이용 가능해요.
                 </p>
               </div>
               <PlatformGuide />

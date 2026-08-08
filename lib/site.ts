@@ -19,7 +19,10 @@ export const SITE = {
   // 빈 문자열이면 스크립트를 심지 않는다
   hotjarTagId: "886e521c1d612",
   siteUrl: PRODUCTION_URL,
-  // TODO: 스토어 등록 후 실제 URL로 교체
-  appStoreUrl: null as string | null,
+  // iOS 정식 출시. iPhone CTA 가 전부 이 주소로 나간다.
+  // 앱 이름이 바뀌어도 id 형식은 그대로 열리므로 슬러그 없이 둔다
+  appStoreUrl: "https://apps.apple.com/kr/app/id6797220287",
+  // Android 는 아직 Google Play 비공개 테스트라 공개 주소가 없다.
+  // TODO: 정식 출시 후 실제 URL로 교체
   playStoreUrl: null as string | null,
 } as const;
