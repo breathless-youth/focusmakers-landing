@@ -36,7 +36,7 @@ export const supabaseAdmin =
 export type BetaTester = {
   email: string;
   platform: "android" | "ios";
-  is_waitlist: boolean;
+  is_waitlisted: boolean;
   referrer: string | null;
   user_agent: string | null;
 };

@@ -81,15 +81,19 @@ Vercel 에 넣을 때는 Production 과 Preview 양쪽에 넣어야 PR 프리뷰
 
 `beta_testers` 는 RLS 를 켜고 정책을 하나도 만들지 않았다 — 브라우저에 나가는
 키로는 읽기도 쓰기도 안 되고, 서버 라우트가 secret 키로만 쓴다.
-선착순 번호는 `beta_testers_ranked` 뷰가 `created_at` 순서로 계산한다.
+선착순 번호는 `beta_testers_ranked` 뷰가 `create_time` 순서로 계산한다.
+
+컬럼 이름은 Google [AIP](https://google.aip.dev) 를 따른다 — 타임스탬프는
+`_time` 접미사(AIP-142), 생성 시각은 `create_time`(AIP-148), 생애주기는
+`status` 가 아니라 `state`(AIP-216), 약어 금지(AIP-140).
 
 ### 초대 대상 뽑기
 
 ```sql
-select seat_no, email, created_at
+select seat_number, email, create_time
 from beta_testers_ranked
-where platform = 'android' and status = 'pending'
-order by seat_no
+where platform = 'android' and state = 'pending'
+order by seat_number
 limit 20;
 ```
 
@@ -97,7 +101,7 @@ limit 20;
 
 ```sql
 update beta_testers
-set status = 'invited', invited_at = now()
+set state = 'invited', invite_time = now()
 where email in ('a@example.com', 'b@example.com');
 ```
 
