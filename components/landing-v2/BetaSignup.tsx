@@ -140,6 +140,9 @@ export function BetaSignup() {
             type="button"
             aria-pressed={platform === p}
             onClick={() => {
+              // 이미 선택된 탭을 다시 눌러도 상태는 그대로다.
+              // 계측도 실제로 바뀔 때만 보내야 전환 수가 부풀지 않는다
+              if (p === platform) return;
               setPlatform(p);
               trackPlatformSelect(p, "apply");
             }}
