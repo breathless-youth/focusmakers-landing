@@ -110,6 +110,7 @@
   --animate-simple-glow: simple-glow 2.6s ease-in-out infinite;
   --animate-faq-in: faq-in 0.24s cubic-bezier(0.23, 1, 0.32, 1);
   --animate-top-in: top-in 0.2s cubic-bezier(0.23, 1, 0.32, 1);
+  --animate-pop: pop 0.42s cubic-bezier(0.23, 1, 0.32, 1);
 
   /* 히어로 배지 점 — 파란 링이 퍼지며 사라진다 */
   @keyframes pulse-dot {
@@ -167,6 +168,20 @@
     }
   }
 
+  /* 신청 완료 체크 표시. opacity 는 건드리지 않는다 —
+     애니메이션이 돌지 않아도 확인 메시지는 보여야 한다 */
+  @keyframes pop {
+    0% {
+      transform: scale(0.4);
+    }
+    60% {
+      transform: scale(1.08);
+    }
+    100% {
+      transform: scale(1);
+    }
+  }
+
   @keyframes top-in {
     from {
       opacity: 0;
@@ -208,7 +223,8 @@ body {
   .animate-ring-out-orange,
   .animate-simple-glow,
   .animate-faq-in,
-  .animate-top-in {
+  .animate-top-in,
+  .animate-pop {
     animation: none;
   }
 }

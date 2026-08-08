@@ -10,6 +10,7 @@ import {
   daysLeft,
 } from "@/lib/beta";
 import { useBeta } from "./BetaContext";
+import { Confetti } from "./Confetti";
 
 /**
  * 최종 CTA의 베타 신청 카드.
@@ -101,8 +102,12 @@ export function BetaSignup() {
   if (status === "done" && saved) {
     return (
       <div className="mt-2 flex w-full max-w-[440px] flex-col items-center gap-2.5">
-        <span className="flex h-11 w-11 items-center justify-center rounded-full bg-[#E8F3FF] text-[#1B64DA]">
-          <CheckIcon size={20} weight="bold" />
+        {/* 색종이는 체크 표시를 기준으로 터진다 */}
+        <span className="relative flex">
+          <Confetti />
+          <span className="animate-pop relative flex h-11 w-11 items-center justify-center rounded-full bg-[#E8F3FF] text-[#1B64DA]">
+            <CheckIcon size={20} weight="bold" />
+          </span>
         </span>
         <span className="text-lg font-bold">신청이 접수됐어요</span>
         <span className="text-center text-[14.5px] leading-[21px] text-[#6B7684]">
