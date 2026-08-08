@@ -1,0 +1,60 @@
+-- 베타 테스터 신청 (app/api/beta/signup/route.ts 가 쓴다).
+-- Supabase 대시보드 > SQL Editor 에 그대로 붙여넣어 실행한다.
+--
+-- iPhone 은 TestFlight 링크로 바로 설치돼서 이메일을 받지 않는다.
+-- 실질적으로 쌓이는 건 Android 신청과, 모집 마감 후의 대기 명단이다.
+
+create table if not exists public.beta_testers (
+  id uuid primary key default gen_random_uuid(),
+  created_at timestamptz not null default now(),
+
+  email text not null,
+  -- 'android' | 'ios'. 체크로 묶어 오타가 들어오지 않게 한다
+  platform text not null check (platform in ('android', 'ios')),
+  -- 1차 모집 마감 후 들어온 신청(대기 명단)인지. lib/beta.tsx 의 BETA_CLOSED
+  is_waitlist boolean not null default false,
+
+  -- 초대 진행 상태. Play Console 초대가 수동이라 여기서 관리한다
+  status text not null default 'pending'
+    check (status in ('pending', 'invited', 'joined', 'rejected')),
+  invited_at timestamptz,
+
+  -- 유입 분석용. 없을 수 있다
+  referrer text,
+  user_agent text
+);
+
+-- 같은 이메일로 두 번 신청되지 않게 (대소문자 무시).
+-- route.ts 의 upsert 가 이 인덱스를 탄다
+create unique index if not exists beta_testers_email_lower_key
+  on public.beta_testers (lower(email));
+
+-- 선착순 정렬과 상태별 조회
+create index if not exists beta_testers_created_at_idx
+  on public.beta_testers (created_at);
+create index if not exists beta_testers_status_idx
+  on public.beta_testers (status);
+
+-- RLS 를 켜고 정책은 하나도 만들지 않는다.
+-- 브라우저에 나가는 키(anon/publishable)로는 읽기도 쓰기도 안 된다.
+-- 신청은 서버 라우트가 secret 키로만 쓴다.
+alter table public.beta_testers enable row level security;
+
+-- 선착순 번호. created_at 순서로 매기며, 초대 대상을 고를 때 쓴다.
+-- 컬럼으로 박으면 삭제·복구 시 어긋나므로 뷰로 계산한다.
+--
+-- security_invoker = true 가 중요하다. 뷰는 기본적으로 "소유자 권한"으로
+-- 실행돼서 밑에 깔린 테이블의 RLS 를 우회한다 — 그대로 두면 public 스키마의
+-- 뷰가 PostgREST 로 노출되면서 anon 이 신청자 전체를 읽을 수 있다.
+-- invoker 로 바꾸면 조회한 역할의 RLS 가 적용돼 anon 에게는 0행이 된다.
+create or replace view public.beta_testers_ranked
+  with (security_invoker = true) as
+  select
+    t.*,
+    row_number() over (order by t.created_at) as seat_no
+  from public.beta_testers t;
+
+-- PostgREST 로 아예 안 보이게 접근 자체를 회수한다 (security_invoker 와
+-- 이중 방어). 대시보드/secret 키 조회에는 영향 없다.
+revoke all on public.beta_testers_ranked from anon, authenticated;
+revoke all on public.beta_testers from anon, authenticated;

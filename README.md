@@ -12,15 +12,11 @@ npm install
 npm run dev
 ```
 
-알림·저장소를 붙이려면 환경변수가 필요하다.
+베타 신청 폼을 로컬에서 확인하려면 환경변수가 필요하다.
 
 ```bash
 cp .env.example .env.local   # 값을 채운 뒤 dev 재시작
 ```
-
-> **아직 신청이 저장되지 않는다.** `app/api/beta/signup/route.ts` 가 검증과
-> 알림까지만 하고 DB 쓰기 자리는 TODO 로 비어 있다. 실제 모집을 시작하기 전에
-> 저장소를 연동해야 한다.
 
 | 스크립트 | 설명 |
 | --- | --- |
@@ -34,14 +30,16 @@ cp .env.example .env.local   # 값을 채운 뒤 dev 재시작
 ```
 app/
   page.tsx            랜딩 (서버 컴포넌트, 섹션 조립)
-  api/beta/signup/    베타 신청 접수 — 검증·레이트리밋·Slack 알림
+  api/beta/signup/    베타 신청 접수 — Supabase 저장 + Slack 알림
   privacy · terms · support
 components/landing-v2/  랜딩 전용 컴포넌트 (목업·폼·아코디언 등)
 lib/
   beta.tsx            모집 설정과 섹션 카피
   site.ts             서비스 상수 (도메인·문의처)
+  supabase-admin.ts   서버 전용 Supabase 클라이언트
   notify.ts           Slack 알림
   rate-limit.ts       IP 레이트리밋
+supabase/migrations/  DB 스키마
 ```
 
 기기 목업은 시안 좌표계(402×874pt)로 그린 뒤 컨테이너 폭에 맞춰 축소한다.
@@ -67,10 +65,41 @@ Android 신청만 DB 에 쌓인다.
 
 | 이름 | 필수 | 설명 |
 | --- | --- | --- |
-| `SLACK_WEBHOOK_URL` | | 신청 알림용 Incoming Webhook. 없으면 알림 없이 접수만 한다 |
+| `SUPABASE_URL` | ○ | Project URL. 공개 값이라 `.env.example` 에 채워져 있다 |
+| `SUPABASE_SECRET_KEY` | ○ | secret 키(`sb_secret_…`). 예전 프로젝트면 service_role 키도 된다 |
+| `SLACK_WEBHOOK_URL` | | 신청 알림용 Incoming Webhook. 없으면 알림 없이 저장만 한다 |
 
-서버 전용 키에는 `NEXT_PUBLIC_` 접두사를 붙이지 않는다.
+secret 키는 RLS 를 우회한다. `NEXT_PUBLIC_` 접두사를 붙이지 말 것 —
+`lib/supabase-admin.ts` 가 `server-only` 로 클라이언트 번들 유입을 빌드 타임에 막는다.
+
 Vercel 에 넣을 때는 Production 과 Preview 양쪽에 넣어야 PR 프리뷰에서도 동작한다.
+키가 없으면 신청 API 가 503 을 돌려주고, 랜딩의 나머지는 정상 동작한다.
+
+## DB
+
+`supabase/migrations/0001_beta_testers.sql` 을 Supabase SQL Editor 에 붙여넣어 실행한다.
+
+`beta_testers` 는 RLS 를 켜고 정책을 하나도 만들지 않았다 — 브라우저에 나가는
+키로는 읽기도 쓰기도 안 되고, 서버 라우트가 secret 키로만 쓴다.
+선착순 번호는 `beta_testers_ranked` 뷰가 `created_at` 순서로 계산한다.
+
+### 초대 대상 뽑기
+
+```sql
+select seat_no, email, created_at
+from beta_testers_ranked
+where platform = 'android' and status = 'pending'
+order by seat_no
+limit 20;
+```
+
+초대를 보냈으면 상태를 갱신한다.
+
+```sql
+update beta_testers
+set status = 'invited', invited_at = now()
+where email in ('a@example.com', 'b@example.com');
+```
 
 ## 배포
 
