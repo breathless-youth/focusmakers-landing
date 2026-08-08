@@ -1,0 +1,214 @@
+@import "tailwindcss";
+
+:root {
+  --background: #fafaf9;
+  --foreground: #18181b;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-pretendard), "Pretendard Variable", Pretendard,
+    -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+  --font-mono: var(--font-geist-mono), ui-monospace, "SF Mono", monospace;
+
+  --animate-fade-up: fade-up 0.7s cubic-bezier(0.16, 1, 0.3, 1) both;
+  --animate-marquee: marquee 28s linear infinite;
+  --animate-soft-pulse: soft-pulse 2.6s ease-in-out infinite;
+  --animate-twinkle: twinkle 3.2s ease-in-out infinite;
+  --animate-drift: drift 14s ease-in-out infinite alternate;
+  --animate-drift-slow: drift 22s ease-in-out infinite alternate-reverse;
+  --animate-float-y: float-y 5.5s ease-in-out infinite;
+  --animate-breathe: breathe 7s ease-in-out infinite;
+  --animate-glow-pulse: glow-pulse 1.8s ease-in-out infinite;
+
+  @keyframes fade-up {
+    from {
+      opacity: 0;
+      transform: translateY(16px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes marquee {
+    from {
+      transform: translateX(0);
+    }
+    to {
+      transform: translateX(-50%);
+    }
+  }
+
+  @keyframes soft-pulse {
+    0%,
+    100% {
+      box-shadow: 0 0 0 0 rgba(37, 99, 235, 0.35);
+    }
+    50% {
+      box-shadow: 0 0 0 6px rgba(37, 99, 235, 0);
+    }
+  }
+
+  @keyframes twinkle {
+    0%,
+    100% {
+      opacity: 0.15;
+    }
+    50% {
+      opacity: 0.9;
+    }
+  }
+
+  @keyframes drift {
+    from {
+      transform: translate3d(-6%, -4%, 0) scale(1);
+    }
+    to {
+      transform: translate3d(6%, 5%, 0) scale(1.12);
+    }
+  }
+
+  @keyframes float-y {
+    0%,
+    100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-10px);
+    }
+  }
+
+  @keyframes breathe {
+    0%,
+    100% {
+      transform: scale(1);
+      opacity: 0.55;
+    }
+    50% {
+      transform: scale(1.07);
+      opacity: 1;
+    }
+  }
+
+  @keyframes glow-pulse {
+    0%,
+    100% {
+      opacity: 1;
+    }
+    60% {
+      opacity: 0.3;
+    }
+  }
+
+  /* ── 랜딩 v2 전용 — Claude Design "FocusMakers Landing v2" 시안 값 그대로 ── */
+  --animate-pulse-dot: pulse-dot 2s ease-out infinite;
+  --animate-ring-out-blue: ring-out-blue 1.8s ease-out infinite;
+  --animate-ring-out-orange: ring-out-orange 1.8s ease-out infinite;
+  --animate-simple-glow: simple-glow 2.6s ease-in-out infinite;
+  --animate-faq-in: faq-in 0.24s cubic-bezier(0.23, 1, 0.32, 1);
+  --animate-top-in: top-in 0.2s cubic-bezier(0.23, 1, 0.32, 1);
+
+  /* 히어로 배지 점 — 파란 링이 퍼지며 사라진다 */
+  @keyframes pulse-dot {
+    0% {
+      box-shadow: 0 0 0 0 rgba(27, 100, 218, 0.35);
+    }
+    70% {
+      box-shadow: 0 0 0 7px rgba(27, 100, 218, 0);
+    }
+    100% {
+      box-shadow: 0 0 0 0 rgba(27, 100, 218, 0);
+    }
+  }
+
+  /* 세션 상태 필 — 측정 중임을 알리는 확산 링 (집중=파랑 · 비집중=주황) */
+  @keyframes ring-out-blue {
+    0% {
+      box-shadow: 0 0 0 0 rgba(69, 147, 252, 0.55);
+    }
+    75%,
+    100% {
+      box-shadow: 0 0 0 14px rgba(69, 147, 252, 0);
+    }
+  }
+
+  @keyframes ring-out-orange {
+    0% {
+      box-shadow: 0 0 0 0 rgba(255, 158, 27, 0.5);
+    }
+    75%,
+    100% {
+      box-shadow: 0 0 0 14px rgba(255, 158, 27, 0);
+    }
+  }
+
+  /* 심플 모드 — 화면 발광이 숨쉬듯 밝아졌다 어두워진다 (시안은 2.6s) */
+  @keyframes simple-glow {
+    0%,
+    100% {
+      opacity: 1;
+    }
+    60% {
+      opacity: 0.22;
+    }
+  }
+
+  @keyframes faq-in {
+    from {
+      opacity: 0;
+      transform: translateY(-5px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes top-in {
+    from {
+      opacity: 0;
+      transform: scale(0.9);
+    }
+    to {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #101012;
+    --foreground: #e4e4e7;
+  }
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-fade-up,
+  .animate-marquee,
+  .animate-soft-pulse,
+  .animate-twinkle,
+  .animate-drift,
+  .animate-drift-slow,
+  .animate-float-y,
+  .animate-breathe,
+  .animate-glow-pulse,
+  .animate-pulse-dot,
+  .animate-ring-out-blue,
+  .animate-ring-out-orange,
+  .animate-simple-glow,
+  .animate-faq-in,
+  .animate-top-in {
+    animation: none;
+  }
+}
