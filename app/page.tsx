@@ -435,11 +435,12 @@ export default function Home() {
           >
             <div className="mx-auto flex max-w-[640px] flex-col items-center gap-5 rounded-3xl bg-white px-6 py-9 text-center shadow-[inset_0_0_0_1px_#E5E8EB,0_18px_44px_rgba(25,31,40,.08)] md:px-12 md:py-13">
               <Image
-                src="/pome/mascot.webp"
-                alt="포메 마스코트"
-                width={64}
-                height={64}
-                className="block h-16 w-16 rounded-full shadow-[0_0_0_1px_#E5E8EB]"
+                src="/pome/mascot-cta.webp"
+                alt="공책에 필기하는 포메 마스코트"
+                width={470}
+                height={512}
+                sizes="70px"
+                className="block h-[76px] w-auto"
               />
               <h2 className="text-[26px] leading-[1.28] font-bold tracking-[-0.8px] break-keep md:text-4xl">
                 지금 바로 <span className="text-[#1B64DA]">순공시간을</span>{" "}
