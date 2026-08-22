@@ -7,6 +7,17 @@ const PRODUCTION_URL = process.env.VERCEL_PROJECT_PRODUCTION_URL
   ? `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}`
   : "https://focusmakers-landing.vercel.app";
 
+/**
+ * 링크 미리보기의 페이지 공통 값. Next 는 자식 page 의 openGraph 가 부모 layout 의
+ * 것을 병합이 아니라 통째로 갈아치우므로, url 을 지정하는 페이지는 이 값도 함께
+ * 펼쳐 넣어야 한다 — 안 그러면 og:type·site_name·locale 이 조용히 사라진다.
+ */
+export const OG_COMMON = {
+  type: "website",
+  siteName: "포메(FocusMakers)",
+  locale: "ko_KR",
+} as const;
+
 export const SITE = {
   appName: "포메",
   appNameKo: "Pome",

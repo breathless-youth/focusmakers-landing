@@ -1,10 +1,12 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { SITE } from "@/lib/site";
+import { OG_COMMON, SITE } from "@/lib/site";
 
 export const metadata: Metadata = {
   title: "이용약관",
   description: "포메 서비스 이용약관",
+  alternates: { canonical: "/terms" },
+  openGraph: { ...OG_COMMON, url: "/terms" },
 };
 
 function Section({

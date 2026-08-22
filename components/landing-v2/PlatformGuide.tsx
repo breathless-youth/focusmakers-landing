@@ -47,7 +47,7 @@ export function PlatformGuide() {
       </div>
 
       {detected && (
-        <p className="text-[13px] break-keep text-[#8B95A1]">
+        <p className="text-[13px] break-keep text-[#6B7684]">
           지금 보고 계신 기기가 {detected === "android" ? "Android" : "iPhone"}라{" "}
           {detected === "android" ? "Android" : "iPhone"} 절차를 먼저 보여드려요
         </p>
@@ -68,7 +68,7 @@ export function PlatformGuide() {
               <span className="text-[15px] font-medium break-keep">
                 {s.title}
               </span>
-              <span className="text-[13px] leading-[19px] text-[#8B95A1]">
+              <span className="text-[13px] leading-[19px] text-[#6B7684]">
                 {s.desc}
               </span>
             </div>

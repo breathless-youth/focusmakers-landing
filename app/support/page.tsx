@@ -1,10 +1,12 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { SITE } from "@/lib/site";
+import { OG_COMMON, SITE } from "@/lib/site";
 
 export const metadata: Metadata = {
   title: "고객지원",
   description: "포메 고객지원 및 자주 묻는 질문",
+  alternates: { canonical: "/support" },
+  openGraph: { ...OG_COMMON, url: "/support" },
 };
 
 function Faq({ q, a }: { q: string; a: React.ReactNode }) {

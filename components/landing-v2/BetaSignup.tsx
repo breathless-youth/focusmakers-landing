@@ -215,7 +215,7 @@ export function BetaSignup() {
           >
             App Store에서 무료로 받기
           </StoreLink>
-          <span className="text-center text-[12.5px] text-[#8B95A1]">
+          <span className="text-center text-[12.5px] text-[#6B7684]">
             지금은 모든 기능을 무료로 사용할 수 있습니다.
           </span>
         </>
@@ -257,7 +257,7 @@ export function BetaSignup() {
                 // 넣었는데 이전 확인이 그대로 통과되면 안 된다
                 setWarnSeen(false);
               }}
-              className="h-[54px] min-w-0 flex-1 rounded-[14px] bg-white px-4 text-[16px] text-[#191F28] placeholder:text-[#8B95A1] shadow-[inset_0_0_0_1px_#D1D6DB] outline-none focus:shadow-[inset_0_0_0_2px_#1B64DA]"
+              className="h-[54px] min-w-0 flex-1 rounded-[14px] bg-white px-4 text-[16px] text-[#191F28] placeholder:text-[#6B7684] shadow-[inset_0_0_0_1px_#D1D6DB] outline-none focus:shadow-[inset_0_0_0_2px_#1B64DA]"
             />
             <button
               type="submit"
@@ -308,14 +308,14 @@ export function BetaSignup() {
             <span className="text-[13px] leading-[19px] break-keep text-[#6B7684]">
               개인정보 수집·이용에 동의합니다.
               <br />
-              <span className="text-[11.5px] text-[#8B95A1]">
+              <span className="text-[11.5px] text-[#6B7684]">
                 수집 항목: 이메일 · 목적: 출시 알림 발송 · 보유: 테스터 등록 후
                 즉시 파기
               </span>
             </span>
           </label>
 
-          <span className="text-center text-[12.5px] text-[#8B95A1]">
+          <span className="text-center text-[12.5px] text-[#6B7684]">
             {ANDROID_BETA_CLOSED
               ? "1차 모집이 마감돼 대기 명단으로 등록돼요"
               : `선착순 ${BETA_SEATS}명 · 신청 즉시 안내 메일을 보내드려요`}

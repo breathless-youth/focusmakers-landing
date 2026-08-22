@@ -26,11 +26,13 @@ import {
   betaCopy,
 } from "@/lib/beta";
 import { APP_DESCRIPTION } from "@/lib/content";
-import { SITE } from "@/lib/site";
+import { OG_COMMON, SITE } from "@/lib/site";
 
 export const metadata: Metadata = {
   description:
     "카메라가 공부를 인식해, 집중하는 동안만 타이머가 흐르는 공부 타이머 포메. 순공시간과 집중률이 자동으로 기록돼요. iPhone은 App Store에서 바로 받고, Android는 베타 테스터로 참여할 수 있어요.",
+  alternates: { canonical: "/" },
+  openGraph: { ...OG_COMMON, url: "/" },
 };
 
 /** narrowHidden: 340px 아래에서는 CTA 버튼이 들어갈 자리가 모자란다.
@@ -148,7 +150,7 @@ export default function Home() {
               >
                 FocusMakers
               </a>
-              <span className="text-[13px] whitespace-nowrap text-[#8B95A1] max-[600px]:hidden">
+              <span className="text-[13px] whitespace-nowrap text-[#6B7684] max-[600px]:hidden">
                 포메
               </span>
             </div>
@@ -220,7 +222,7 @@ export default function Home() {
                     >
                       {s.countUp ? <CountUp value={s.value} /> : s.value}
                     </dd>
-                    <dt className="text-[12.5px] text-[#8B95A1]">{s.label}</dt>
+                    <dt className="text-[12.5px] text-[#6B7684]">{s.label}</dt>
                   </div>
                 ))}
               </dl>
@@ -457,7 +459,7 @@ export default function Home() {
           <div className="mx-auto flex w-full max-w-[1120px] flex-col items-center gap-6 md:flex-row md:items-start md:justify-between md:gap-4">
             <div className="flex flex-col items-center gap-1.5 md:items-start">
               <span className="text-base font-bold">FocusMakers</span>
-              <span className="text-[13px] text-[#8B95A1]">
+              <span className="text-[13px] text-[#6B7684]">
                 포메 · 순공시간 자동 측정
               </span>
             </div>
@@ -482,7 +484,7 @@ export default function Home() {
               >
                 문의 {SITE.supportEmail}
               </a>
-              <span className="text-xs text-[#8B95A1]">© 2026 FocusMakers</span>
+              <span className="text-xs text-[#6B7684]">© 2026 FocusMakers</span>
             </div>
           </div>
         </footer>
