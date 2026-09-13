@@ -31,8 +31,10 @@ export const SITE = {
   hotjarTagId: "886e521c1d612",
   siteUrl: PRODUCTION_URL,
   // iOS 정식 출시. iPhone CTA 가 전부 이 주소로 나간다.
-  // 앱 이름이 바뀌어도 id 형식은 그대로 열리므로 슬러그 없이 둔다
-  appStoreUrl: "https://apps.apple.com/kr/app/id6797220287",
+  // App Store Connect 캠페인 링크(pt·ct)라 App Analytics 에서 랜딩 유입 설치를
+  // 따로 볼 수 있다. 앱 이름이 바뀌어도 id 형식은 그대로 열리므로 슬러그 없이 둔다
+  appStoreUrl:
+    "https://apps.apple.com/app/apple-store/id6797220287?pt=129235193&ct=landing_page&mt=8",
   // Android 는 아직 Google Play 비공개 테스트라 공개 주소가 없다.
   // TODO: 정식 출시 후 실제 URL로 교체
   playStoreUrl: null as string | null,
