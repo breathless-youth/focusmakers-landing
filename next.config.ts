@@ -18,6 +18,15 @@ const nextConfig: NextConfig = {
         // 캠페인 파라미터를 갈아끼울 수 있게 307(비영구)로 둔다
         permanent: false,
       },
+      {
+        // 메타 광고 링크 → Apple 캠페인 링크(pt·ct)로. 앱스토어는 UTM 을 읽지 않고
+        // App Analytics 의 "소스 > 캠페인" 이 pt·ct 로 유입을 집계한다
+        source: "/ios",
+        destination:
+          "https://apps.apple.com/app/apple-store/id6797220287?pt=129235193&ct=meta_ads&mt=8",
+        // 캠페인 파라미터를 갈아끼울 수 있게 307(비영구)로 둔다
+        permanent: false,
+      },
     ];
   },
 };
