@@ -121,35 +121,6 @@ export const INSIGHT_ROWS: { label: string; value: React.ReactNode }[] = [
   },
 ];
 
-/** 지금 참여하면 받는 혜택 3단계 */
-export const BENEFITS: {
-  step: string;
-  eyebrow: string;
-  title: string;
-  desc: string;
-  last?: boolean;
-}[] = [
-  {
-    step: "1",
-    eyebrow: "오늘 시작하면",
-    title: "바로 무료로 사용",
-    desc: `iPhone은 App Store에서 바로 · Android는 선착순 ${BETA_SEATS}명 모집 중`,
-  },
-  {
-    step: "2",
-    eyebrow: "지금 쌓은 기록은",
-    title: "그대로 이어져요",
-    desc: "순공시간과 스트릭이 이후 버전에서도 유지돼요",
-  },
-  {
-    step: "3",
-    eyebrow: "프리미엄 출시 후 · 대상자 전원",
-    title: "프리미엄 1년 무료",
-    desc: "8.7 – 8.16 서비스 이용자 또는 Android 테스트 참여자 · 약 15만원 상당 · 소셜 스터디와 집중 리포트 포함",
-    last: true,
-  },
-];
-
 /** 참여 방법 — 기기별 3단계 */
 export const HOW_STEPS: Record<Platform, { title: string; desc: string }[]> = {
   ios: [

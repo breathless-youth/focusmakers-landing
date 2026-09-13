@@ -18,7 +18,6 @@ import {
 } from "@/components/landing-v2/SessionPhones";
 import { StoreLink } from "@/components/landing-v2/StoreLink";
 import {
-  BENEFITS,
   BETA_FAQS,
   FEATURE_ROWS,
   HERO_STATS,
@@ -356,51 +355,6 @@ export default function Home() {
                     className="block w-full"
                   />
                 </div>
-              </div>
-            </Reveal>
-          </section>
-
-          {/* 베타 혜택 */}
-          <section
-            id="benefits"
-            className="scroll-mt-[72px] px-5 pt-[88px] pb-6"
-          >
-            <Reveal className="mx-auto flex max-w-[960px] flex-col gap-8">
-              <h2 className="text-center text-[26px] font-bold tracking-[-0.5px] break-keep md:text-[34px]">
-                지금 시작하는 분들을 위한 혜택
-              </h2>
-              <div className="mt-2 grid gap-y-8 md:grid-cols-3">
-                {BENEFITS.map((b) => (
-                  <div key={b.step} className="flex flex-col gap-3 px-6">
-                    <div className="flex items-center gap-2.5">
-                      <span
-                        className={`flex h-[34px] w-[34px] flex-none items-center justify-center rounded-full text-sm font-bold ${
-                          b.last
-                            ? "bg-[#1B64DA] text-white shadow-[0_6px_18px_rgba(27,100,218,.28)]"
-                            : "bg-[#E8F3FF] text-[#1B64DA]"
-                        }`}
-                      >
-                        {b.step}
-                      </span>
-                      {!b.last && (
-                        <span className="h-0.5 flex-1 bg-[#E5E8EB]" />
-                      )}
-                    </div>
-                    <span className="text-[13px] font-semibold text-[#1B64DA]">
-                      {b.eyebrow}
-                    </span>
-                    <span
-                      className={`text-[21px] font-bold tracking-[-0.4px] break-keep ${
-                        b.last ? "text-[#1B64DA]" : ""
-                      }`}
-                    >
-                      {b.title}
-                    </span>
-                    <span className="text-[13.5px] leading-5 break-keep text-[#6B7684]">
-                      {b.desc}
-                    </span>
-                  </div>
-                ))}
               </div>
             </Reveal>
           </section>
