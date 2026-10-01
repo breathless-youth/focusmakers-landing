@@ -262,8 +262,7 @@ export default function PrivacyPage() {
           />
           <p className="rounded-lg border border-zinc-200 bg-zinc-50 p-4 font-medium text-zinc-800 dark:border-zinc-800 dark:bg-zinc-900 dark:text-zinc-200">
             Hotjar 는 화면 조작 기록을 수집하지만, 이용자가 입력창에 적은
-            내용은 수집하지 않습니다. 베타 신청 폼은 별도 설정으로 화면
-            기록에서 가려지며, 입력한 이메일 주소는 전송되지 않습니다.
+            내용은 수집하지 않습니다.
           </p>
           <p>
             이 분석은 웹사이트(랜딩 페이지)에만 적용되며, 앱 이용 기록이나

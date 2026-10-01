@@ -104,27 +104,12 @@
     }
   }
 
-  /* ── 랜딩 v2 전용 — Claude Design "FocusMakers Landing v2" 시안 값 그대로 ── */
-  --animate-pulse-dot: pulse-dot 2s ease-out infinite;
+  /* ── 랜딩 전용 — Claude Design "FocusMakers Landing v3" 시안 값 그대로 ── */
   --animate-ring-out-blue: ring-out-blue 1.8s ease-out infinite;
   --animate-ring-out-orange: ring-out-orange 1.8s ease-out infinite;
   --animate-simple-glow: simple-glow 2.6s ease-in-out infinite;
   --animate-faq-in: faq-in 0.24s cubic-bezier(0.23, 1, 0.32, 1);
   --animate-top-in: top-in 0.2s cubic-bezier(0.23, 1, 0.32, 1);
-  --animate-pop: pop 0.42s cubic-bezier(0.23, 1, 0.32, 1);
-
-  /* 히어로 배지 점 — 파란 링이 퍼지며 사라진다 */
-  @keyframes pulse-dot {
-    0% {
-      box-shadow: 0 0 0 0 rgba(27, 100, 218, 0.35);
-    }
-    70% {
-      box-shadow: 0 0 0 7px rgba(27, 100, 218, 0);
-    }
-    100% {
-      box-shadow: 0 0 0 0 rgba(27, 100, 218, 0);
-    }
-  }
 
   /* 세션 상태 필 — 측정 중임을 알리는 확산 링 (집중=파랑 · 비집중=주황) */
   @keyframes ring-out-blue {
@@ -169,20 +154,6 @@
     }
   }
 
-  /* 신청 완료 체크 표시. opacity 는 건드리지 않는다 —
-     애니메이션이 돌지 않아도 확인 메시지는 보여야 한다 */
-  @keyframes pop {
-    0% {
-      transform: scale(0.4);
-    }
-    60% {
-      transform: scale(1.08);
-    }
-    100% {
-      transform: scale(1);
-    }
-  }
-
   @keyframes top-in {
     from {
       opacity: 0;
@@ -219,13 +190,11 @@ body {
   .animate-float-y,
   .animate-breathe,
   .animate-glow-pulse,
-  .animate-pulse-dot,
   .animate-ring-out-blue,
   .animate-ring-out-orange,
   .animate-simple-glow,
   .animate-faq-in,
-  .animate-top-in,
-  .animate-pop {
+  .animate-top-in {
     animation: none;
   }
 }

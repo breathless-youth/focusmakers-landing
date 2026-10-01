@@ -33,7 +33,7 @@ export function FaqAccordion({ items }: { items: { q: string; a: string }[] }) {
               />
             </button>
             {isOpen && (
-              <p className="animate-faq-in px-1 pb-5 text-[15px] leading-[23px] text-pretty break-keep text-[#6B7684]">
+              <p className="animate-faq-in px-1 pb-5 text-[15px] leading-[23px] text-pretty break-keep whitespace-pre-line text-[#6B7684]">
                 {f.a}
               </p>
             )}
