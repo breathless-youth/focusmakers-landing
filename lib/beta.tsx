@@ -1,21 +1,14 @@
 /**
- * 베타 모집(랜딩 v2) 전용 설정과 문구.
+ * 메인 랜딩 전용 문구.
  * lib/content.ts 는 intro/* 시안 10종이 공유하므로 건드리지 않고, 메인 랜딩이
- * 쓰는 모집 관련 값만 여기 모아 둔다.
+ * 쓰는 값만 여기 모아 둔다.
  *
- * iOS 는 App Store 정식 출시라 모집 상태와 무관하게 늘 스토어로 직행한다.
- * 그래서 아래 모집 관련 값은 전부 Android 비공개 테스트에만 걸린다.
+ * 파일·식별자 이름의 beta 는 Android 비공개 테스트 모집 시절의 흔적이다.
  */
 
-/** Android 1차 모집이 마감되면 true. 히어로 뱃지·보조 링크·신청 폼 문구가
- *  대기 명단 버전으로 바뀐다. iPhone 동선은 이 값의 영향을 받지 않는다. */
+/** 랜딩의 신청 폼은 내렸고, 남겨 둔 신청 API(app/api/beta/signup)만 이 값을
+ *  읽는다. API 를 지울 때 함께 지운다 */
 export const ANDROID_BETA_CLOSED = false;
-
-/** Android 1차 모집 마감 시각(KST). 신청 폼 아래 D-day 문구 계산에 쓴다 */
-export const BETA_DEADLINE = "2026-08-16T23:59:59+09:00";
-
-/** Android 선착순 모집 인원 */
-export const BETA_SEATS = 80;
 
 export type Platform = "ios" | "android";
 
@@ -99,7 +92,7 @@ export const FEATURE_ROWS: FeatureRow[] = [
   },
 ];
 
-/** 집중 리포트 미리보기 — 정식 출시 후 제공 */
+/** 집중 리포트 미리보기 — 업데이트 예정 */
 export const INSIGHT_ROWS: { label: string; value: React.ReactNode }[] = [
   {
     label: "가장 집중이 잘 되는 시간",
@@ -121,88 +114,30 @@ export const INSIGHT_ROWS: { label: string; value: React.ReactNode }[] = [
   },
 ];
 
-/** 참여 방법 — 기기별 3단계 */
-export const HOW_STEPS: Record<Platform, { title: string; desc: string }[]> = {
-  ios: [
-    {
-      title: "App Store에서 포메를 설치해요",
-      desc: "정식 출시돼 바로 내려받을 수 있어요",
-    },
-    {
-      title: "앱을 열고 카메라 권한을 허용해요",
-      desc: "영상은 저장되지 않고 기기 안에서만 분석돼요",
-    },
-    {
-      title: "타이머를 켜면 순공시간이 쌓여요",
-      desc: "회원가입 없이 바로 시작할 수 있어요",
-    },
-  ],
-  android: [
-    {
-      title: "아래 폼에서 Google 계정 이메일로 신청해요",
-      desc: "Play 스토어에 로그인된 계정이어야 해요",
-    },
-    {
-      title: "테스터 등록 완료 메일을 받아요",
-      desc: "등록까지 최대 12시간 걸릴 수 있어요",
-    },
-    {
-      title: "메일 속 링크로 Google Play에서 설치해요",
-      desc: "신청한 계정으로 로그인된 기기에서만 보여요",
-    },
-  ],
-};
-
-/** 메인 랜딩 FAQ.
- *  요금과 참여 방법은 iPhone / Android 가 서로 달라 기기별로 나눠 답한다.
- *  iPhone 설치 방법은 히어로 CTA 와 참여 방법 섹션에서 이미 답이 끝난다 */
+/** 메인 랜딩 FAQ */
 export const BETA_FAQS: { q: string; a: string }[] = [
   {
-    q: "iPhone에서도 무료인가요?",
-    a: "네, 무료로 내려받아 사용할 수 있습니다. 소셜 스터디와 집중 리포트 등 프리미엄 기능은 준비되는 대로 따로 안내드립니다.",
-  },
-  {
-    q: "Android에서는 어떻게 참여하나요?",
-    a: "Google Play 비공개 테스트로 진행됩니다. Play 스토어에 로그인된 Google 계정 이메일로 신청해주시면 최대 12시간 내 초대 링크를 전달드립니다.",
+    q: "무료인가요?",
+    a: "앱 다운로드와 기본 기능은 무료로 사용할 수 있습니다. 요금제 관련 안내는 앱 내에서 확인하실 수 있습니다.",
   },
   {
     q: "카메라 영상이 저장되나요?",
-    a: "저장되지 않습니다. 영상은 기기 안에서 분석에만 쓰이며, 공부 시간 등 최소한의 정보만 텍스트로 남습니다.",
+    a: "저장되지 않습니다. 영상은 기기 안에서 분석에만 쓰이며, 공부 시간 등 최소한의 정보만 텍스트로 기록됩니다.",
+  },
+  {
+    q: "어떤 기기에서 쓸 수 있나요?",
+    a: "iPhone과 Android를 모두 지원하며, 태블릿에서도 사용할 수 있습니다.\niOS는 App Store, Android는 Google Play에서 설치할 수 있습니다.",
   },
   {
     q: "자리를 비우면 어떻게 되나요?",
     a: "자리 이탈이 감지되면 측정이 잠시 멈춥니다. 돌아오면 별도 조작없이 자동으로 다시 측정됩니다.",
   },
   {
-    q: "Android 선착순이 마감되면 체험이 어려운가요?",
-    a: "대기 명단에 등록해 두시면 자리가 나는 대로 순서대로 안내해 드립니다. iPhone은 App Store에서 언제든 바로 설치할 수 있습니다.",
+    q: "친구와 함께 공부하려면 어떻게 하나요?",
+    a: "앱에서 스터디 그룹을 만들거나 초대 코드로 참여하면 함께 순공시간을 쌓을 수 있습니다.",
+  },
+  {
+    q: "집중 리포트는 언제 나오나요?",
+    a: "주간·월간 집중 패턴을 분석하는 리포트는 다음 업데이트에서 제공할 예정입니다.",
   },
 ];
-
-/** 모집 상태에 따라 갈리는 문구 모음.
- *  iPhone 은 늘 App Store 로 가므로 주 CTA 문구는 여기서 갈리지 않는다 */
-export function betaCopy(closed = ANDROID_BETA_CLOSED) {
-  return {
-    headerCta: "무료로 시작",
-    heroCta: "App Store에서 무료로 받기",
-    /** 히어로 주 CTA 아래 보조 링크 — Android 신청 폼으로 보낸다 */
-    heroSubCta: closed
-      ? "Android 대기 명단 등록하기 →"
-      : "Android 베타 테스터로 참여하기 →",
-    // 두 상태를 한 줄에 담아야 해서 길이가 빠듯하다. 320px 뷰포트에서 줄이
-    // 접히지 않는 선이 "베타 대기 명단"까지다 — 더 늘리지 말 것
-    badge: closed
-      ? "iOS 정식 출시 · Android 베타 대기 명단"
-      : "iOS 정식 출시 · Android 베타 모집 중",
-    ctaSub: closed
-      ? "iPhone은 App Store에서 바로, Android는 자리가 나면 안내해드려요."
-      : "iPhone은 App Store에서 바로, Android는 베타 테스터로 참여할 수 있어요.",
-    submitLabel: closed ? "대기 명단 등록" : "테스터 등록",
-  };
-}
-
-/** 마감까지 남은 일수. 지났으면 0 */
-export function daysLeft(deadline = BETA_DEADLINE) {
-  const ms = new Date(deadline).getTime() - Date.now();
-  return Math.max(0, Math.ceil(ms / 86_400_000));
-}

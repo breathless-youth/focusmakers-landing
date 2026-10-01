@@ -2,7 +2,7 @@
 
 포메(FocusMakers) 서비스 랜딩 페이지. Next.js App Router + Tailwind CSS v4.
 
-Claude Design 프로젝트 [FocusMakers Landing v2](https://claude.ai/design/p/cc6d01ad-890c-4187-9d57-1609e5fb3090?file=FocusMakers+Landing+v2.dc.html)
+Claude Design 프로젝트 [FocusMakers Landing v3](https://claude.ai/design/p/cc6d01ad-890c-4187-9d57-1609e5fb3090?file=FocusMakers+Landing+v3.dc.html)
 시안을 구현한 것으로, 카피·수치·모션 값은 시안 기준이다.
 
 ## 실행
@@ -12,7 +12,8 @@ npm install
 npm run dev
 ```
 
-베타 신청 폼을 로컬에서 확인하려면 환경변수가 필요하다.
+랜딩은 환경변수 없이 뜬다. 신청 API(`app/api/beta/signup`)를 로컬에서 돌릴
+때만 환경변수가 필요하다.
 
 ```bash
 cp .env.example .env.local   # 값을 채운 뒤 dev 재시작
@@ -30,12 +31,12 @@ cp .env.example .env.local   # 값을 채운 뒤 dev 재시작
 ```
 app/
   page.tsx            랜딩 (서버 컴포넌트, 섹션 조립)
-  api/beta/signup/    베타 신청 접수 — Supabase 저장 + Slack 알림
+  api/beta/signup/    Android 베타 신청 접수 (랜딩 폼은 내림, API 만 남음)
   privacy · terms · support
-components/landing-v2/  랜딩 전용 컴포넌트 (목업·폼·아코디언 등)
+components/landing-v2/  랜딩 전용 컴포넌트 (목업·스토어 링크·아코디언 등)
 lib/
-  beta.tsx            모집 설정과 섹션 카피
-  site.ts             서비스 상수 (도메인·문의처)
+  beta.tsx            섹션 카피와 스토어 버튼 문구
+  site.ts             서비스 상수 (도메인·문의처·스토어 주소)
   supabase-admin.ts   서버 전용 Supabase 클라이언트
   notify.ts           Slack 알림
   rate-limit.ts       IP 레이트리밋
@@ -46,20 +47,14 @@ supabase/migrations/  DB 스키마
 덕분에 안쪽 수치를 앱 디자인에서 그대로 옮겨 쓸 수 있다 —
 `components/landing-v2/PhoneFrame.tsx` 참고.
 
-## 베타 모집 운영
+## 스토어 링크
 
-`lib/beta.tsx` 상단 값만 바꾸면 된다.
+iPhone·Android 모두 정식 출시라 모든 CTA 가 스토어로 직행한다. 주소는
+`lib/site.ts` 의 `appStoreUrl` · `playStoreUrl` 두 값이고, 둘 다 랜딩 유입을
+구분하는 캠페인 파라미터(App Store `ct`, Google Play `referrer` UTM)를 달고 있다.
 
-| 값 | 설명 |
-| --- | --- |
-| `BETA_CLOSED` | `true` 로 두면 전 기기가 대기 명단 폼으로 바뀌고 헤더·히어로·CTA 문구도 함께 전환된다 |
-| `TESTFLIGHT_URL` | iPhone 이 바로 열 TestFlight 초대 링크 |
-| `BETA_DEADLINE` | 신청 폼의 D-day 계산 기준 |
-| `BETA_SEATS` | 선착순 인원 |
-
-iPhone 은 TestFlight 링크로 직행하므로 이메일을 받지 않는다.
-Android 신청만 DB 에 쌓인다.
-
+Android 베타 신청 폼은 내렸다. 기존 신청자 데이터가 남아 있어 신청 API 와
+`beta_testers` 테이블은 그대로 둔다.
 
 ## 환경변수
 

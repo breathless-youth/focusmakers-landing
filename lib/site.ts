@@ -35,7 +35,9 @@ export const SITE = {
   // 따로 볼 수 있다. 앱 이름이 바뀌어도 id 형식은 그대로 열리므로 슬러그 없이 둔다
   appStoreUrl:
     "https://apps.apple.com/app/apple-store/id6797220287?pt=129235193&ct=landing_page&mt=8",
-  // Android 는 아직 Google Play 비공개 테스트라 공개 주소가 없다.
-  // TODO: 정식 출시 후 실제 URL로 교체
-  playStoreUrl: null as string | null,
+  // Android 정식 출시. Android CTA 가 전부 이 주소로 나간다.
+  // referrer 에 실은 UTM 은 Play Console 획득 보고서에서 랜딩 유입 설치를 따로
+  // 보는 용도다 — appStoreUrl 의 ct=landing_page 와 짝을 맞췄다
+  playStoreUrl:
+    "https://play.google.com/store/apps/details?id=com.breathlessyouth.mobile&referrer=utm_source%3Dlanding_page%26utm_medium%3Dreferral%26utm_campaign%3Dlanding_page",
 } as const;
