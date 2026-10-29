@@ -3,7 +3,7 @@
 
 window.FM_CONFIG = {
   // Supabase 프로젝트 설정 → API 에서 복사
-  SUPABASE_URL: "https://oggpdtzpumjvrueirrvf.supabase.co",   // 메인 랜딩과 같은 프로젝트
+  SUPABASE_URL: "https://yoaionhkemexdqnlppcg.supabase.co",
   SUPABASE_ANON_KEY: "sb_publishable_Wvh4vbgNEQtT7W8sN5luWg_x7B1PJBd",   // 공개용(publishable) 키. secret 키는 절대 넣지 마세요
 
   // 메타 픽셀 ID. 비워두면 픽셀을 불러오지 않습니다.

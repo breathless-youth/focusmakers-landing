@@ -34,7 +34,7 @@ public/lofi/
 ## 1. Supabase 준비 (5분)
 
 1. Supabase에서 새 프로젝트 생성
-2. SQL Editor → `supabase/migrations/0003_lofi_waitlist.sql` 붙여넣고 Run (메인 랜딩과 같은 프로젝트를 써도 된다)
+2. SQL Editor → `supabase/migrations/0003_lofi_waitlist.sql` 붙여넣고 Run (프로젝트 yoaionhkemexdqnlppcg)
 3. Project Settings → API에서 `Project URL`과 `anon public` 키를 복사해 `config.js`에 넣기
    - `service_role` 키는 절대 넣지 마세요. 브라우저에 그대로 노출돼요.
    - anon 키로는 신청 **추가만** 되고, 목록 조회는 안 되게 막아뒀어요.
