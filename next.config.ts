@@ -1,6 +1,12 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
+  async rewrites() {
+    return [
+      // 로파이 컨셉 검증용 정적 페이지 (public/lofi/). docs/lofi-landing.md 참고
+      { source: "/lofi", destination: "/lofi/index.html" },
+    ];
+  },
   async redirects() {
     return [
       {
