@@ -2,6 +2,7 @@
 // assets/lofi.mp3 가 있으면 그 파일을, 없으면 브라우저에서 로파이 코드를 직접 연주해요.
 (() => {
   const presets = {
+    final:   { rain: 0,  cafe: 0,  fire: 0,  page: 0,  music: .7 },   // 마지막(새벽 옥상): 로파이만
     cover:   { rain: 55, cafe: 0,  fire: 0,  page: 0,  music: .65 },  // 첫 화면: 비 오는 밤 + 로파이
     window:  { rain: 70, cafe: 0,  fire: 12, page: 0,  music: .55 },
     cafe:    { rain: 0,  cafe: 75, fire: 0,  page: 0,  music: .6 },   // 카페: 빗소리 없이 웅성거림 + 로파이

@@ -29,6 +29,11 @@ window.FM_CONFIG = {
   // assets/scene-window.mp4 처럼 같은 이름의 파일을 넣으면 그 파일을 먼저 써요.
   // 광고 집행 전에는 README 안내대로 파일을 내려받아 assets/ 에 넣는 걸 권장해요.
   SCENE_VIDEOS: {
+    final: {    // 마지막 사전신청 배경 — 새벽 옥상에서 도시를 바라보는 캐릭터 (직접 만든 영상, 레포에 포함)
+      hd: "/lofi/assets/scene-final.mp4",
+      sd: "/lofi/assets/scene-final.mp4",
+      poster: "/lofi/assets/scene-final.jpg",
+    },
     cover: {    // 첫 화면(표지) — 비 오는 밤, 창가에서 공부하는 캐릭터 (직접 만든 영상, 레포에 포함)
       hd: "/lofi/assets/scene-cover.mp4",
       sd: "/lofi/assets/scene-cover.mp4",

@@ -119,7 +119,8 @@
   .has-video > video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; background: #0b1119; }
   .has-video::after { content: ""; position: absolute; inset: 0; pointer-events: none; background: radial-gradient(120% 90% at 50% 40%, rgba(6,9,14,.12), rgba(6,9,14,.55)); }
   .v-cover > video { object-position: 60% 50%; filter: brightness(.9) saturate(1.05); }
-  @media (max-aspect-ratio: 1/1) { .v-cover > video { object-position: 80% 50%; } }
+  .v-final > video { object-position: 70% 50%; filter: brightness(.95) saturate(1.05); }
+  @media (max-aspect-ratio: 1/1) { .v-cover > video { object-position: 80% 50%; } .v-final > video { object-position: 82% 50%; } }
   .v-window > video { filter: brightness(.62) saturate(1.2) contrast(1.08) sepia(.12); }
   .v-cafe > video { filter: brightness(.8) saturate(1.05) contrast(1.04); }
   .v-library > video { filter: brightness(.95) saturate(1.05); }
@@ -267,7 +268,7 @@
   /* 5. 마지막 */
   .final { position: relative; margin-top: clamp(110px, 16vh, 180px); min-height: 100svh; display: grid; align-content: center; justify-items: center; text-align: center; padding: 120px 20px 140px; overflow: hidden; }
   .final__scene { position: absolute; inset: 0; z-index: 0; container-type: size; }
-  .final .final__scene::after { content: ""; position: absolute; inset: 0; background: radial-gradient(70% 60% at 50% 50%, rgba(5,7,10,.62), rgba(5,7,10,.88)); }
+  .final .final__scene::after { content: ""; position: absolute; inset: 0; background: radial-gradient(70% 60% at 50% 50%, rgba(5,7,10,.55), rgba(5,7,10,.8)); }
   .final > :not(.final__scene):not(footer) { position: relative; z-index: 1; }
   .final footer { z-index: 1; }
   .final .big { font-size: clamp(38px, 6vw, 88px); }
@@ -612,7 +613,7 @@
 
   <!-- 5. 마지막 -->
   <section class="final" id="join" aria-labelledby="joinH">
-    <div class="final__scene" data-scene-host="window"></div>
+    <div class="final__scene" data-scene-host="final"></div>
     <h2 class="big" id="joinH">자리, 먼저 맡아둘게요</h2>
     <p class="lead">출시되면 웹에서 바로 열 수 있어요.</p>
     <div data-signup-slot="final"></div>
@@ -641,7 +642,7 @@
   const clamp = (v, a = 0, b = 1) => Math.min(b, Math.max(a, v));
   const ramp = (p, a, b) => clamp((p - a) / (b - a));
   const ease = t => t < .5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
-  const sceneNames = { cover: "비 오는 창가", window: "비 오는 창가", cafe: "새벽 카페", library: "조용한 도서관", room: "캐릭터 방" };
+  const sceneNames = { final: "새벽 옥상", cover: "비 오는 창가", window: "비 오는 창가", cafe: "새벽 카페", library: "조용한 도서관", room: "캐릭터 방" };
 
   /* ───────── 측정: 메타 픽셀 + UTM ───────── */
   const track = (e, p) => { try { window.fbq && fbq("track", e, p); } catch (_) {} };
@@ -684,7 +685,7 @@
   const ANIME = (params.get("style") || CFG.SCENE_STYLE || "real") === "anime";
   if (ANIME) document.documentElement.classList.add("is-anime");
   // 표지(cover)는 영상이 안 뜰 때 창가 그림(애니메이션 버전은 캐릭터 방)으로 대신해요
-  const art = kind => FMScene(kind === "cover" ? (ANIME ? "room" : "window") : ANIME && kind === "window" ? "room" : kind);
+  const art = kind => FMScene(kind === "cover" ? (ANIME ? "room" : "window") : kind === "final" ? "window" : ANIME && kind === "window" ? "room" : kind);
   const layerVideo = {};
   $$(".scene-layer").forEach(layer => {
     const kind = layer.dataset.kind;
@@ -693,7 +694,7 @@
   });
   play(layerVideo.cover);
   const hostVideos = [];
-  $$("[data-scene-host]").forEach(h => { h.innerHTML = art(h.dataset.sceneHost); if (!ANIME) hostVideos.push(sceneVideo(h.dataset.sceneHost, h, false)); });
+  $$("[data-scene-host]").forEach(h => { h.innerHTML = art(h.dataset.sceneHost); if (!ANIME || h.dataset.sceneHost === "final") hostVideos.push(sceneVideo(h.dataset.sceneHost, h, false)); });
   $$("[data-pick]").forEach(b => {
     const m = VIDS[b.dataset.pick];
     if (!ANIME && m && m.poster) b.insertAdjacentHTML("afterbegin", `<img src="${m.poster}" alt="" loading="lazy" onerror="this.remove()">`);
@@ -887,7 +888,7 @@
     else if (inView(timerSec)) kind = "library";   // 아이패드 화면 속 도서관
     else if (inView(camsSec) || inView(cheerSec)) kind = "cafe";   // "새벽 카페 · 우리 스터디"
     else if (inView(mixSec)) kind = null;           // 믹서는 직접 고른 소리를 유지
-    else if (inView(finalSec)) kind = "window";
+    else if (inView(finalSec)) kind = "final";      // 새벽 옥상: 음악만 조용히
     if (kind) setScene(kind, "scroll");
   }
 
