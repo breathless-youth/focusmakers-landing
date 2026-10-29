@@ -147,7 +147,7 @@
 
   .hero-copy { position: absolute; inset: 0; z-index: 4; display: grid; place-items: center; text-align: center; pointer-events: none; padding: 0 20px 12svh; }
   .hero-copy h1 { margin: 0; font-weight: 700; font-size: clamp(32px, min(5vw, 8svh), 76px); line-height: 1.15; letter-spacing: -0.04em; text-shadow: 0 2px 30px rgba(0,0,0,.55), 0 0 80px rgba(0,0,0,.35); }
-  .hero-sub { margin: 18px 0 0; font-size: clamp(15px, min(1.5vw, 2.6svh), 21px); line-height: 1.6; font-weight: 500; color: rgba(255,255,255,.86); letter-spacing: -0.01em; text-shadow: 0 1px 18px rgba(0,0,0,.75); }
+  .hero-sub { margin: 16px 0 0; font-size: clamp(13px, min(1.2vw, 2.1svh), 17px); line-height: 1.6; font-weight: 500; color: rgba(255,255,255,.86); letter-spacing: -0.01em; text-shadow: 0 1px 18px rgba(0,0,0,.75); }
   .hero-copy--top, .is-anime .hero-copy { place-items: start center; padding: max(118px, 16svh) 20px 0; }
   .hint { position: absolute; left: 0; right: 0; bottom: max(28px, 5svh); z-index: 5; display: flex; flex-direction: column; align-items: center; gap: 14px; pointer-events: none; }
   .hint__tap { padding: 10px 18px; border-radius: 999px; background: rgba(0,0,0,.38); border: 1px solid var(--line-2); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); font-size: 14.5px; display: inline-flex; align-items: center; gap: 10px; transition: opacity .5s; }
@@ -338,7 +338,7 @@
     .timer .intro .big br { display: inline; }
     .kicker { font-size: 13px; margin-bottom: 8px; }
     .hero-copy--top { place-items: end center; padding: 0 20px calc(17svh + 40px); }
-    .hero-sub { font-size: 14.5px; margin-top: 12px; }
+    .hero-sub { font-size: 13px; margin-top: 10px; }
     .nav { padding: max(12px, env(safe-area-inset-top)) 16px 10px; }
     .brand { font-size: 16px; }
     .nav__right { gap: 6px; }
@@ -392,7 +392,7 @@
   }
   /* 가로로 눕힌 폰처럼 세로가 짧은 화면 */
   @media (max-height: 560px) and (orientation: landscape) {
-    .hero-sub { font-size: 13px; margin-top: 8px; }
+    .hero-sub { font-size: 12px; margin-top: 6px; }
     .nav { padding-top: 10px; padding-bottom: 8px; }
     .hero-copy { padding-bottom: 8svh; }
     .hint { bottom: 12px; gap: 8px; } .hint__mouse { display: none; }
@@ -485,7 +485,7 @@
 
       <div class="shade" id="shade"></div>
 
-      <div class="hero-copy hero-copy--top" id="heroCopy"><div><h1>집중을 도와주는<br>온라인 공간</h1><p class="hero-sub">비 오는 창가, 새벽 카페, 조용한 도서관.<br>광고 없는 공부 배경에, AI 공부 타이머까지</p></div></div>
+      <div class="hero-copy hero-copy--top" id="heroCopy"><div><h1>집중을 도와주는<br>온라인 공간</h1><p class="hero-sub">비 오는 창가, 새벽 카페, 조용한 도서관<br>광고 없는 공부 배경에, AI 공부 타이머까지</p></div></div>
 
       <div class="hint" id="hint">
         <span class="hint__tap" id="tapHint">화면을 누르면 음악이 흘러나와요</span>
