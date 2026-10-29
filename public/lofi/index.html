@@ -435,8 +435,8 @@
       <p class="form-msg" role="status" aria-live="polite"></p>
     </form>
     <div class="done" role="status" aria-live="polite">
-      <strong>자리 맡아뒀어요</strong>
-      <span data-role="done-text">출시되면 가장 먼저 알려드릴게요. 프리미엄 공간 1개월도 함께요.</span>
+      <strong>신청이 완료되었어요</strong>
+      <span data-role="done-text">출시되면 가장 먼저 알려드릴게요</span>
     </div>
   </section>
 </template>
@@ -967,7 +967,7 @@
       } else console.warn("[waitlist] Supabase 설정이 비어 있어 저장하지 않았어요. config.js를 채워주세요.", row);
       if (!already) track("Lead", { content_name: (CFG.LANDING_VARIANT || "lofi") + (ANIME ? "-anime" : ""), contact_type: type, position: where });
       $$(".signup").forEach(s => {
-        $("[data-role=done-text]", s).textContent = already ? "이미 신청해 두셨어요. 출시되면 가장 먼저 알려드릴게요." : "출시되면 가장 먼저 알려드릴게요. 프리미엄 공간 1개월도 함께요.";
+        $("[data-role=done-text]", s).textContent = already ? "이미 신청해 두셨어요. 출시되면 가장 먼저 알려드릴게요." : "출시되면 가장 먼저 알려드릴게요";
         s.classList.add("is-done");
       });
     });
