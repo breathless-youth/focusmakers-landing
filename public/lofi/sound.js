@@ -2,6 +2,7 @@
 // assets/lofi.mp3 가 있으면 그 파일을, 없으면 브라우저에서 로파이 코드를 직접 연주해요.
 (() => {
   const presets = {
+    cover:   { rain: 55, cafe: 0,  fire: 0,  page: 0,  music: .65 },  // 첫 화면: 비 오는 밤 + 로파이
     window:  { rain: 70, cafe: 0,  fire: 12, page: 0,  music: .55 },
     cafe:    { rain: 0,  cafe: 75, fire: 0,  page: 0,  music: .6 },   // 카페: 빗소리 없이 웅성거림 + 로파이
     library: { rain: 0,  cafe: 0,  fire: 0,  page: 70, music: .3 },   // 도서관: 조용한 공기 + 책장 넘기는 소리만
@@ -9,8 +10,8 @@
   };
   const level = { rain: .85, cafe: 1.3, fire: 1.1, page: 1.2 };
   const CH = ["rain", "cafe", "fire", "page"];
-  const mix = { ...presets.window };
-  let A = null, on = false, musicLevel = presets.window.music;
+  const mix = { ...presets.cover };
+  let A = null, on = false, musicLevel = presets.cover.music;
   const listeners = new Set();
   const emit = () => listeners.forEach(fn => fn(on));
 

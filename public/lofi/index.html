@@ -118,6 +118,8 @@
   /* 실사 영상 + 색보정 */
   .has-video > video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; background: #0b1119; }
   .has-video::after { content: ""; position: absolute; inset: 0; pointer-events: none; background: radial-gradient(120% 90% at 50% 40%, rgba(6,9,14,.12), rgba(6,9,14,.55)); }
+  .v-cover > video { object-position: 60% 50%; filter: brightness(.9) saturate(1.05); }
+  @media (max-aspect-ratio: 1/1) { .v-cover > video { object-position: 80% 50%; } }
   .v-window > video { filter: brightness(.62) saturate(1.2) contrast(1.08) sepia(.12); }
   .v-cafe > video { filter: brightness(.8) saturate(1.05) contrast(1.04); }
   .v-library > video { filter: brightness(.95) saturate(1.05); }
@@ -135,7 +137,7 @@
 
   .hero-copy { position: absolute; inset: 0; z-index: 4; display: grid; place-items: center; text-align: center; pointer-events: none; padding: 0 20px 12svh; }
   .hero-copy h1 { margin: 0; font-weight: 700; font-size: clamp(32px, min(5vw, 8svh), 76px); line-height: 1.15; letter-spacing: -0.04em; text-shadow: 0 2px 30px rgba(0,0,0,.55), 0 0 80px rgba(0,0,0,.35); }
-  .is-anime .hero-copy { place-items: start center; padding: max(118px, 16svh) 20px 0; }
+  .hero-copy--top, .is-anime .hero-copy { place-items: start center; padding: max(118px, 16svh) 20px 0; }
   .hint { position: absolute; left: 0; right: 0; bottom: max(28px, 5svh); z-index: 5; display: flex; flex-direction: column; align-items: center; gap: 14px; pointer-events: none; }
   .hint__tap { padding: 10px 18px; border-radius: 999px; background: rgba(0,0,0,.38); border: 1px solid var(--line-2); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); font-size: 14.5px; display: inline-flex; align-items: center; gap: 10px; transition: opacity .5s; }
   .hint__tap.is-hidden { opacity: 0; }
@@ -453,7 +455,8 @@
       </div>
 
       <div class="scene-wrap" id="sceneWrap">
-        <div class="scene-layer is-on" data-kind="window"></div>
+        <div class="scene-layer is-on" data-kind="cover"></div>
+        <div class="scene-layer" data-kind="window"></div>
         <div class="scene-layer" data-kind="cafe"></div>
         <div class="scene-layer" data-kind="library"></div>
         <div class="scene-layer" data-kind="room"></div>
@@ -462,7 +465,7 @@
 
       <div class="shade" id="shade"></div>
 
-      <div class="hero-copy" id="heroCopy"><h1>여기서<br>같이 공부해요</h1></div>
+      <div class="hero-copy hero-copy--top" id="heroCopy"><h1>여기서<br>같이 공부해요</h1></div>
 
       <div class="hint" id="hint">
         <span class="hint__tap" id="tapHint">화면을 누르면 빗소리와 음악이 흘러나와요</span>
@@ -638,7 +641,7 @@
   const clamp = (v, a = 0, b = 1) => Math.min(b, Math.max(a, v));
   const ramp = (p, a, b) => clamp((p - a) / (b - a));
   const ease = t => t < .5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
-  const sceneNames = { window: "비 오는 창가", cafe: "새벽 카페", library: "조용한 도서관", room: "캐릭터 방" };
+  const sceneNames = { cover: "비 오는 창가", window: "비 오는 창가", cafe: "새벽 카페", library: "조용한 도서관", room: "캐릭터 방" };
 
   /* ───────── 측정: 메타 픽셀 + UTM ───────── */
   const track = (e, p) => { try { window.fbq && fbq("track", e, p); } catch (_) {} };
@@ -680,14 +683,15 @@
   //   → 실사 영상 대신 직접 그린 장면, 첫 화면은 캐릭터 방
   const ANIME = (params.get("style") || CFG.SCENE_STYLE || "real") === "anime";
   if (ANIME) document.documentElement.classList.add("is-anime");
-  const art = kind => FMScene(ANIME && kind === "window" ? "room" : kind);
+  // 표지(cover)는 영상이 안 뜰 때 창가 그림(애니메이션 버전은 캐릭터 방)으로 대신해요
+  const art = kind => FMScene(kind === "cover" ? (ANIME ? "room" : "window") : ANIME && kind === "window" ? "room" : kind);
   const layerVideo = {};
   $$(".scene-layer").forEach(layer => {
     const kind = layer.dataset.kind;
     layer.innerHTML = art(kind);
-    if (!ANIME && VIDS[kind]) layerVideo[kind] = sceneVideo(kind, layer, kind === "window");
+    if ((!ANIME || kind === "cover") && VIDS[kind]) layerVideo[kind] = sceneVideo(kind, layer, kind === "cover");
   });
-  play(layerVideo.window);
+  play(layerVideo.cover);
   const hostVideos = [];
   $$("[data-scene-host]").forEach(h => { h.innerHTML = art(h.dataset.sceneHost); if (!ANIME) hostVideos.push(sceneVideo(h.dataset.sceneHost, h, false)); });
   $$("[data-pick]").forEach(b => {
@@ -751,7 +755,7 @@
   addEventListener("keydown", e => { if (e.key === " " || e.key === "Enter") firstTouch(e); });
 
   /* ───────── 공간 전환 ───────── */
-  let currentScene = "window";
+  let currentScene = "cover";
   const sliders = $$("#mixer input[type=range]");
   const paint = r => { r.style.setProperty("--p", r.value + "%"); r.nextElementSibling.textContent = r.value; };
   function syncSliders() { sliders.forEach(r => { r.value = r.dataset.ch === "music" ? FMSound.music : FMSound.mix[r.dataset.ch]; paint(r); }); }
@@ -879,7 +883,7 @@
   const inView = el => { const r = el.getBoundingClientRect(), mid = innerHeight / 2; return r.top <= mid && r.bottom >= mid; };
   function autoScene() {
     let kind = null;
-    if (inView(story)) kind = lastStep === 2 ? "cafe" : lastStep === 3 ? "library" : "window";
+    if (inView(story)) kind = lastStep === 0 ? "cover" : lastStep === 2 ? "cafe" : lastStep === 3 ? "library" : "window";
     else if (inView(timerSec)) kind = "library";   // 아이패드 화면 속 도서관
     else if (inView(camsSec) || inView(cheerSec)) kind = "cafe";   // "새벽 카페 · 우리 스터디"
     else if (inView(mixSec)) kind = null;           // 믹서는 직접 고른 소리를 유지
