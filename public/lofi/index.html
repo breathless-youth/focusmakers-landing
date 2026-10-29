@@ -233,7 +233,7 @@
   .section { padding: clamp(110px, 16vh, 180px) clamp(20px, 6vw, 96px) 0; max-width: 1360px; margin: 0 auto; }
   .mixer-wrap { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 6fr); gap: clamp(32px, 6vw, 96px); align-items: center; }
   .panel { background: var(--surface); border: 1px solid var(--line); border-radius: 28px; padding: clamp(22px, 3vw, 36px); }
-  .scene-pick { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin-bottom: 26px; }
+  .scene-pick { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-bottom: 26px; }
   .pick { position: relative; aspect-ratio: 16/10; border-radius: 14px; overflow: hidden; border: 1px solid var(--line-2); padding: 0; cursor: pointer; background: #000; }
   .pick .fm-scene-svg { position: absolute; inset: 0; }
   .pick span { position: absolute; left: 0; right: 0; bottom: 0; padding: 14px 10px 8px; font-size: 13.5px; font-weight: 600; text-align: left; background: linear-gradient(0deg, rgba(0,0,0,.75), transparent); }
@@ -361,7 +361,6 @@
     .room__grid { grid-template-columns: repeat(2, 1fr); grid-template-rows: repeat(3, 1fr); }
     .laptop-static { width: 92vw; }
     .features { grid-template-columns: 1fr; }
-    .scene-pick { grid-template-columns: repeat(2, 1fr); }
     .scene-pick span { font-size: 12px; }
     .mix-row { grid-template-columns: 66px 1fr 32px; }
   }
@@ -460,7 +459,6 @@
         <div class="scene-layer" data-kind="window"></div>
         <div class="scene-layer" data-kind="cafe"></div>
         <div class="scene-layer" data-kind="library"></div>
-        <div class="scene-layer" data-kind="room"></div>
         <div class="scene-ui" id="sceneUi" aria-hidden="true"><span><i></i>비 오는 창가</span><span>순공 <b data-clock>01:24:07</b></span></div>
       </div>
 
@@ -579,7 +577,6 @@
           <button class="pick" type="button" data-pick="window" aria-pressed="true"><span>비 오는 창가</span></button>
           <button class="pick" type="button" data-pick="cafe" aria-pressed="false"><span>새벽 카페</span></button>
           <button class="pick" type="button" data-pick="library" aria-pressed="false"><span>조용한 도서관</span></button>
-          <button class="pick" type="button" data-pick="room" aria-pressed="false"><span>캐릭터 방</span></button>
         </div>
         <div class="mixer" id="mixer">
           <label class="mix-row"><span>로파이</span><input type="range" min="0" max="100" value="55" data-ch="music" aria-label="로파이 음악 크기"><output>55</output></label>
@@ -619,7 +616,7 @@
     <div data-signup-slot="final"></div>
     <footer>
       <span>포커스메이커스 · breathless-youth</span>
-      <span><a href="https://www.instagram.com/focus.makers" target="_blank" rel="noopener">인스타그램</a> &nbsp;·&nbsp; <a href="mailto:breathless.youth@gmail.com">breathless.youth@gmail.com</a></span>
+      <span><a href="mailto:breathless.youth@gmail.com">breathless.youth@gmail.com</a></span>
     </footer>
   </section>
 </main>
@@ -642,7 +639,7 @@
   const clamp = (v, a = 0, b = 1) => Math.min(b, Math.max(a, v));
   const ramp = (p, a, b) => clamp((p - a) / (b - a));
   const ease = t => t < .5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
-  const sceneNames = { final: "새벽 옥상", cover: "비 오는 창가", window: "비 오는 창가", cafe: "새벽 카페", library: "조용한 도서관", room: "캐릭터 방" };
+  const sceneNames = { final: "새벽 옥상", cover: "비 오는 창가", window: "비 오는 창가", cafe: "새벽 카페", library: "조용한 도서관" };
 
   /* ───────── 측정: 메타 픽셀 + UTM ───────── */
   const track = (e, p) => { try { window.fbq && fbq("track", e, p); } catch (_) {} };
@@ -685,7 +682,7 @@
   const ANIME = (params.get("style") || CFG.SCENE_STYLE || "real") === "anime";
   if (ANIME) document.documentElement.classList.add("is-anime");
   // 표지(cover)는 영상이 안 뜰 때 창가 그림(애니메이션 버전은 캐릭터 방)으로 대신해요
-  const art = kind => FMScene(kind === "cover" ? (ANIME ? "room" : "window") : kind === "final" ? "window" : ANIME && kind === "window" ? "room" : kind);
+  const art = kind => FMScene(kind === "cover" || kind === "final" ? "window" : kind);
   const layerVideo = {};
   $$(".scene-layer").forEach(layer => {
     const kind = layer.dataset.kind;

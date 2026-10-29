@@ -7,7 +7,6 @@
     window:  { rain: 70, cafe: 0,  fire: 12, page: 0,  music: .55 },
     cafe:    { rain: 0,  cafe: 75, fire: 0,  page: 0,  music: .6 },   // 카페: 빗소리 없이 웅성거림 + 로파이
     library: { rain: 0,  cafe: 0,  fire: 0,  page: 70, music: .3 },   // 도서관: 조용한 공기 + 책장 넘기는 소리만
-    room:    { rain: 0,  cafe: 0,  fire: 0,  page: 0,  music: .8 },   // 캐릭터 방: 로파이만
   };
   const level = { rain: .85, cafe: 1.3, fire: 1.1, page: 1.2 };
   const CH = ["rain", "cafe", "fire", "page"];
