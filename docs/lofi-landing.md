@@ -75,7 +75,7 @@ public/lofi/
 
 | 파일 | 넣으면 | 권장 |
 |---|---|---|
-| `public/lofi/assets/lofi.mp3` | 브라우저 합성 음악 대신 이 음악이 나와요 | 1~3분 루프, 128kbps, 저작권 확인된 음원 |
+| `public/lofi/assets/lofi.mp3` | **들어 있음** — Suno "실유의 리듬"(72bpm 로파이, 3분). 페이지 전체 배경음이고 장면마다 크기만 달라져요. 없거나 못 불러오면 브라우저 합성 음악으로 대신 | 1~3분 루프, 128kbps, 상업 이용 가능한 음원 (Suno는 유료 플랜에서 만든 곡만) |
 | `public/lofi/assets/cafe.mp3` | 카페 녹음을 이 파일로 바꿔요. 지금은 Mixkit의 [Restaurant crowd talking ambience](https://mixkit.co/free-sound-effects/restaurant/)를 서버에서 바로 불러와요 (`config.js`의 `CAFE_AUDIO`). 광고 전엔 내려받아 넣는 걸 권장 | 1~3분 루프 |
 | `public/lofi/assets/page.mp3` | 도서관 장면의 책장 넘기는 소리. 지금은 Mixkit의 [Single book paging](https://mixkit.co/free-sound-effects/page/)을 서버에서 바로 불러와요 (`config.js`의 `PAGE_AUDIO`) | 2~3초 단발 녹음 |
 | `public/lofi/assets/og.jpg` | 카톡·인스타 링크 미리보기 이미지 | 1200×630 (첫 화면 캡처 추천) |

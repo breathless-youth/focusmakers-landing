@@ -237,24 +237,34 @@
   }
 
   /* 로파이 파일 → 없으면 합성 */
+  /* 배경음: assets/lofi.mp3 (Suno "실유의 리듬", 72bpm 로파이) → 못 불러오면 브라우저 합성 음악
+     - 파일이 늦게 준비되면 일단 합성 음악으로 시작했다가, 준비되는 순간 파일로 자연스럽게 넘어가요 */
   function tryFile() {
-    let decided = false;
-    const el = filePlayer(A.ac, A.music, ["/lofi/assets/lofi.mp3"], {
-      onReady: () => { if (decided) { el.pause(); el.removeAttribute("src"); return; } decided = true; },
-      onFail: () => { if (!decided) { decided = true; startSynth(); } },
+    let fileReady = false, failed = false;
+    filePlayer(A.ac, A.music, ["/lofi/assets/lofi.mp3"], {
+      volume: .8,
+      onReady: () => { fileReady = true; stopSynth(); },
+      onFail: () => { failed = true; if (!A.synth) startSynth(); },
     });
-    setTimeout(() => { if (!decided) { decided = true; startSynth(); } }, 2500);
+    setTimeout(() => { if (!fileReady && !failed && !A.synth) startSynth(); }, 4000);
+  }
+  function stopSynth() {
+    if (!A.synth) return;
+    clearInterval(A.synth); A.synth = null;
+    try { A.vin && A.vin.stop(A.ac.currentTime + 1.5); } catch (_) {}
+    const g = A.synthOut && A.synthOut.gain, t = A.ac.currentTime;
+    if (g) { g.cancelScheduledValues(t); g.setValueAtTime(g.value, t); g.linearRampToValueAtTime(0, t + 1.5); }
   }
 
   function startSynth() {
-    const ac = A.ac, out = ac.createGain(); out.gain.value = .55;
+    const ac = A.ac, out = ac.createGain(); out.gain.value = .55; A.synthOut = out;
     const warm = ac.createBiquadFilter(); warm.type = "lowpass"; warm.frequency.value = 1900; warm.Q.value = .3;
     // 살짝 늘어지는 테이프 느낌
     const wob = ac.createDelay(); wob.delayTime.value = .012;
     const wl = ac.createOscillator(); wl.frequency.value = .4; const wg = ac.createGain(); wg.gain.value = .0018; wl.connect(wg).connect(wob.delayTime); wl.start();
     out.connect(warm).connect(wob).connect(A.music);
     // 바이닐 잡음
-    const vin = ac.createBufferSource(); vin.buffer = noise(ac, 3); vin.loop = true; const vhp = ac.createBiquadFilter(); vhp.type = "highpass"; vhp.frequency.value = 3000; const vg = ac.createGain(); vg.gain.value = .025; vin.connect(vhp).connect(vg).connect(A.music); vin.start();
+    const vin = ac.createBufferSource(); vin.buffer = noise(ac, 3); vin.loop = true; const vhp = ac.createBiquadFilter(); vhp.type = "highpass"; vhp.frequency.value = 3000; const vg = ac.createGain(); vg.gain.value = .025; vin.connect(vhp).connect(vg).connect(A.music); vin.start(); A.vin = vin;
     const pop = noise(ac, .01);
 
     const bpm = 72, beat = 60 / bpm, bar = beat * 4;
