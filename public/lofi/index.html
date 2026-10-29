@@ -328,6 +328,8 @@
     .cheer .laptop-static { justify-self: center; width: min(100%, calc((100svh - 330px) * 1.52)); }
   }
   @media (max-width: 600px) {
+    .timer .big { font-size: clamp(24px, 7.4vw, 32px); white-space: nowrap; }
+    .timer .big br { display: none; }
     .hero-copy--top { place-items: end center; padding: 0 20px calc(17svh + 40px); }
     .nav { padding: max(12px, env(safe-area-inset-top)) 16px 10px; }
     .brand { font-size: 16px; }
@@ -494,10 +496,10 @@
     <div class="pin__sticky">
       <div>
         <div class="copy-stack" id="timerCopy">
-          <div data-i="0"><p class="big">앉으면<br>흐르고</p><p class="lead">카메라가 자리를 지키는지만 봐요. 앉아 있는 동안 순공 시간이 쌓여요.</p></div>
-          <div data-i="1"><p class="big">휴대폰을 들면<br>멈추고</p><p class="lead">휴대폰을 만지는 순간 1~2초 안에 타이머가 멈춰요.</p></div>
-          <div data-i="2"><p class="big">자리를 비우면<br>기다리고</p><p class="lead">잠깐 일어난 시간은 빼고 셀게요.</p></div>
-          <div data-i="3"><p class="big">돌아오면<br>다시 흘러가요</p><p class="lead">그래서 기록에 남는 건 진짜 공부한 시간이에요.</p></div>
+          <div data-i="0"><p class="big">앉으면 <br>흐르고</p><p class="lead">카메라가 자리를 지키는지만 봐요. 앉아 있는 동안 순공 시간이 쌓여요.</p></div>
+          <div data-i="1"><p class="big">휴대폰을 들면 <br>멈추고</p><p class="lead">휴대폰을 만지는 순간 1~2초 안에 타이머가 멈춰요.</p></div>
+          <div data-i="2"><p class="big">자리를 비우면 <br>기다리고</p><p class="lead">잠깐 일어난 시간은 빼고 셀게요.</p></div>
+          <div data-i="3"><p class="big">돌아오면 <br>다시 흘러가요</p><p class="lead">그래서 기록에 남는 건 진짜 공부한 시간이에요.</p></div>
         </div>
         <p class="privacy-note"><svg aria-hidden="true"><use href="#ic-shield"/></svg>영상은 기기 밖으로 나가지 않아요. 저장도 전송도 하지 않아요.</p>
       </div>
