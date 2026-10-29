@@ -5,6 +5,15 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>포커스메이커스 · 여기서 같이 공부해요</title>
 <meta name="robots" content="noindex">
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-C0Y6FPL8Z2"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-C0Y6FPL8Z2');
+</script>
 <meta name="description" content="비 오는 창가, 새벽 카페, 조용한 도서관. 화면에 띄워두는 로파이 공부방. 딴짓은 AI가 잡아줘요. 사전 신청하면 프리미엄 공간 1개월 무료.">
 <meta property="og:title" content="여기서 같이 공부해요 · 포커스메이커스">
 <meta property="og:description" content="화면에 띄워두는 로파이 공부방. 사전 신청하면 프리미엄 공간 1개월 무료.">
@@ -642,8 +651,10 @@
   const sceneNames = { final: "새벽 옥상", cover: "비 오는 창가", window: "비 오는 창가", cafe: "새벽 카페", library: "조용한 도서관" };
 
   /* ───────── 측정: 메타 픽셀 + UTM ───────── */
-  const track = (e, p) => { try { window.fbq && fbq("track", e, p); } catch (_) {} };
-  const trackCustom = (e, p) => { try { window.fbq && fbq("trackCustom", e, p); } catch (_) {} };
+  // 메타 픽셀 + GA4 에 같은 이벤트를 보내요. 신청 완료(Lead)는 GA4 권장 이벤트 이름 generate_lead 로
+  const ga = (e, p) => { try { window.gtag && gtag("event", e, p || {}); } catch (_) {} };
+  const track = (e, p) => { try { window.fbq && fbq("track", e, p); } catch (_) {} ga(e === "Lead" ? "generate_lead" : e, p); };
+  const trackCustom = (e, p) => { try { window.fbq && fbq("trackCustom", e, p); } catch (_) {} ga(e.replace(/([a-z])([A-Z])/g, "$1_$2").toLowerCase(), p); };
   if (CFG.META_PIXEL_ID) {
     !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');
     fbq("init", CFG.META_PIXEL_ID); fbq("track", "PageView");
