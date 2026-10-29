@@ -328,6 +328,7 @@
     .cheer .laptop-static { justify-self: center; width: min(100%, calc((100svh - 330px) * 1.52)); }
   }
   @media (max-width: 600px) {
+    .hero-copy--top { place-items: end center; padding: 0 20px calc(17svh + 40px); }
     .nav { padding: max(12px, env(safe-area-inset-top)) 16px 10px; }
     .brand { font-size: 16px; }
     .nav__right { gap: 6px; }
@@ -750,7 +751,9 @@
       hide, aim,
     };
   })();
-  setTimeout(() => nudge.show(), 3000);
+  // 첫 화면에서 한 번만. 스크롤을 시작하면 말풍선은 접고, 버튼 둘레 물결만 남겨요(다른 문구를 가리지 않게)
+  setTimeout(() => { if (scrollY < innerHeight * .3) nudge.show(); }, 2500);
+  addEventListener("scroll", () => { if (scrollY > innerHeight * .3) nudge.hide(); }, { passive: true });
   nudge.sync();
   addEventListener("resize", () => nudge.aim());
   // 화면 아무 곳이나 처음 누르면 소리 시작 (브라우저 자동재생 정책 때문에 한 번의 탭이 필요해요)
@@ -776,7 +779,6 @@
     setTimeout(() => Object.entries(layerVideo).forEach(([k, v]) => { if (k !== currentScene) pause(v); }), 1500);
     $$("[data-pick]").forEach(b => b.setAttribute("aria-pressed", String(b.dataset.pick === kind)));
     FMSound.scene(kind); syncSliders();
-    if (from === "scroll") nudge.show();
     trackCustom("SceneSelect", { scene: kind, from });
   }
   sliders.forEach(r => { paint(r); r.addEventListener("input", () => { paint(r); FMSound.channel(r.dataset.ch, +r.value); if (!FMSound.on) FMSound.set(true); }); });
