@@ -86,7 +86,7 @@ export const FEATURE_ROWS: FeatureRow[] = [
     ),
     body: "매일의 순공시간이 스트릭과 캘린더로 쌓여요.",
     bullets: [
-      { term: "연속 학습 스트릭", desc: "하루 최소 10분이면 이어져요" },
+      { term: "연속 학습 스트릭", desc: "하루 최소 5분이면 이어져요" },
       { term: "집중률", desc: "얼마나 집중했는지 %로 남아요" },
     ],
   },

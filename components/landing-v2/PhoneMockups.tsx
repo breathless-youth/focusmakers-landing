@@ -209,7 +209,7 @@ export function RecordsPhone({ width = 262 }: { width?: number }) {
               <div className="flex flex-col gap-0.5">
                 <span className="text-[17px] leading-5 font-bold">12일 연속 공부 중</span>
                 <span className="text-[12.5px] leading-[15px] text-[#6B7684]">
-                  내일도 10분만 하면 이어져요
+                  내일도 5분만 하면 이어져요
                 </span>
               </div>
             </div>
