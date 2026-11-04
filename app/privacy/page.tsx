@@ -324,7 +324,7 @@ export default function PrivacyPage() {
               ],
               [
                 "Google LLC",
-                "웹사이트와 서비스의 이용 통계 분석(Google Analytics, Firebase Analytics), 푸시 알림 발송(Firebase Cloud Messaging), 앱 원격 설정(Firebase Remote Config) / 미국",
+                "웹사이트와 서비스의 이용 통계 분석(Google Analytics, Firebase Analytics), 푸시 알림 발송(Firebase Cloud Messaging), 앱 원격 설정(Firebase Remote Config), 앱 설치 광고의 성과 측정(Google Ads) / 미국",
               ],
               [
                 "Hotjar Ltd. (Contentsquare 그룹)",
@@ -427,7 +427,7 @@ export default function PrivacyPage() {
               ["이전 일시 및 방법", "서비스 이용 중 네트워크를 통해 수시 전송"],
               [
                 "이용 목적",
-                "서비스 이용 통계 분석, 푸시 알림 발송 및 발송 대상 선정, 앱 원격 설정",
+                "서비스 이용 통계 분석, 푸시 알림 발송 및 발송 대상 선정, 앱 원격 설정, 앱 설치 광고의 성과 측정",
               ],
               [
                 "보유 및 이용 기간",
