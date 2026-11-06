@@ -12,5 +12,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${SITE.siteUrl}/privacy` },
     { url: `${SITE.siteUrl}/terms` },
     { url: `${SITE.siteUrl}/support` },
+    { url: `${SITE.siteUrl}${SITE.accountDeletionPath}` },
   ];
 }
