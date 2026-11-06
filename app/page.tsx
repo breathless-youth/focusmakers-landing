@@ -40,6 +40,7 @@ const FOOTER_LINKS = [
   { href: "/terms", label: "이용약관" },
   { href: SITE.privacyPath, label: "개인정보처리방침" },
   { href: "/support", label: "문의" },
+  { href: SITE.accountDeletionPath, label: "계정 삭제" },
 ];
 
 function JsonLd() {
@@ -386,7 +387,7 @@ export default function Home() {
           </div>
           <nav
             aria-label="약관 및 문의"
-            className="flex items-center gap-6 md:pt-0.5"
+            className="flex flex-wrap items-center justify-center gap-x-6 gap-y-2 md:pt-0.5"
           >
             {FOOTER_LINKS.map((l) => (
               <Link

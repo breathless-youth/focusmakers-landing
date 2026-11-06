@@ -59,11 +59,26 @@ export default function SupportPage() {
         />
         <Faq
           q="앱을 삭제하거나 기기를 바꾸면 기록이 사라지나요?"
-          a="서비스는 회원가입 없이 기기 식별자를 기준으로 기록을 저장하므로, 앱 삭제나 기기 변경 시 기존 기록에는 다시 접근할 수 없습니다."
+          a="로그인하지 않고 쓰면 기기 식별자를 기준으로 기록을 저장하므로, 앱 삭제나 기기 변경 시 기존 기록에는 다시 접근할 수 없습니다. 소셜 로그인했다면 같은 계정으로 다시 로그인해 기존 기록을 이어서 볼 수 있습니다."
         />
         <Faq
           q="내 데이터를 전부 지우고 싶어요."
-          a="앱은 별도의 로그인 계정이 없어 인앱 자동 삭제 기능은 제공하지 않습니다. 위 이메일로 삭제를 요청해 주시면 확인 후 서버에 저장된 기록을 지체 없이 삭제해 드립니다."
+          a={
+            <>
+              소셜 로그인했다면 앱의 설정 &gt; 계정 &gt; 계정 삭제에서 바로
+              지울 수 있습니다. 삭제하면 서버에 저장된 공부 기록과 계정 정보가
+              즉시 삭제되며 되돌릴 수 없습니다. 로그인하지 않고 썼거나 앱을 쓸
+              수 없다면 위 이메일로 요청해 주세요.
+              자세한 방법은{" "}
+              <Link
+                href={SITE.accountDeletionPath}
+                className="underline underline-offset-4"
+              >
+                계정 삭제 안내
+              </Link>
+              에 있습니다.
+            </>
+          }
         />
       </div>
 
@@ -76,6 +91,12 @@ export default function SupportPage() {
         </Link>
         <Link href="/terms" className="underline underline-offset-4">
           이용약관
+        </Link>
+        <Link
+          href={SITE.accountDeletionPath}
+          className="underline underline-offset-4"
+        >
+          계정 삭제
         </Link>
       </footer>
     </main>

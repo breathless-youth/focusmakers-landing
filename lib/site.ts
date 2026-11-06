@@ -24,6 +24,8 @@ export const SITE = {
   teamName: "숨 벅찬 청년들",
   supportEmail: "breathless.youth@gmail.com",
   privacyPath: "/privacy",
+  // Google Play 가 요구하는 앱 밖 계정 삭제 요청 페이지. Play Console 의 계정 삭제 URL 칸에 이 주소를 넣는다
+  accountDeletionPath: "/account-deletion",
   // GA4 측정 ID. 페이지 소스에 그대로 실리는 공개 값이라 환경변수로 빼지 않는다
   gaMeasurementId: "G-RFCX9MHMYR",
   // Hotjar(Contentsquare) 태그 ID. 페이지 소스에 실리는 공개 값이다.
