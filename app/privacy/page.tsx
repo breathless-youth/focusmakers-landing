@@ -63,7 +63,11 @@ export default function PrivacyPage() {
           개인정보처리방침
         </h1>
         <p className="text-sm text-zinc-500 dark:text-zinc-400">
-          시행일: 2026년 11월 14일
+          시행일: 2026년 11월 21일
+        </p>
+        <p className="text-sm text-zinc-500 dark:text-zinc-400">
+          직전 방침(2026년 11월 14일 시행)에서 1조의 문의 내용을 보강하고, 7조
+          처리 위탁에 앱 내 문의 상담(채널톡)을 더했습니다.
         </p>
       </header>
 
@@ -118,7 +122,7 @@ export default function PrivacyPage() {
               ],
               [
                 "문의 내용",
-                "앱 내 문의 기능을 이용할 때 이용자가 작성한 내용과 회신을 위해 이용자가 직접 입력한 연락처",
+                "앱 내 문의 기능을 이용할 때 이용자가 작성한 내용과 첨부한 파일, 회신을 위해 이용자가 직접 입력한 이메일. 문의할 때 서버가 기기 식별자에 붙인 번호, 앱 버전, 기기 종류, 언어 설정이 상담 화면에 함께 전달되고, 상담을 이어서 볼 수 있도록 채널톡이 브라우저에 익명 식별자를 저장합니다.",
               ],
               [
                 "서비스 이용 기록",
@@ -362,6 +366,10 @@ export default function PrivacyPage() {
               [
                 "주식회사 에이비일팔공(AB180 Inc.) (Airbridge)",
                 "앱 설치 광고의 성과 측정 / 일본 (Amazon Web Services 도쿄 리전)",
+              ],
+              [
+                "주식회사 채널코퍼레이션 (채널톡)",
+                "앱 내 문의 접수와 상담 응대, 상담 내역 보관 / 대한민국 (Amazon Web Services 서울 리전)",
               ],
             ]}
           />
