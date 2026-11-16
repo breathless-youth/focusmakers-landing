@@ -18,6 +18,38 @@ export const OG_COMMON = {
   locale: "ko_KR",
 } as const;
 
+/**
+ * 약관 제20조에 싣는 사업자 정보. 사업자등록증과 통신판매업 신고증의 값이다.
+ * 하나라도 비면 `BusinessInfoTable`이 프로덕션 빌드를 멈춘다.
+ */
+export const BUSINESS = {
+  name: "포커스메이커스",
+  representative: "권상재",
+  address: "경상남도 김해시 삼안로310번길 11-20, 503호(삼방동, 명보그린빌)",
+  registrationNumber: "154-08-03955",
+  mailOrderNumber: "제2026-경남김해-1410호",
+  phone: "010-2480-9588",
+} as const;
+
+/**
+ * 2026년 11월 23일 시행 약관·방침 개정의 날짜와 주소
+ *
+ * 공지 기간에는 `/terms`·`/privacy`가 지금 판을 보여 주고, 새 판은 시행일 주소에 따로 둔다.
+ * 시행일에 `/terms`·`/privacy`의 본문을 새 판으로 바꾸고 머리말 위의 개정 안내를 뺀다.
+ * noticeDate는 공지 페이지를 실제로 게시한 날이어야 하고, 시행일보다 7일 이상 앞서야 한다.
+ */
+export const LEGAL_REVISION = {
+  noticeDate: "2026년 11월 16일",
+  effectiveDate: "2026년 11월 23일",
+  previousEffectiveDate: "2026년 11월 14일",
+  previousLastDate: "2026년 11월 22일",
+  noticePath: "/notice/2026-11-23",
+  termsPath: "/terms/2026-11-23",
+  privacyPath: "/privacy/2026-11-23",
+  previousTermsPath: "/terms/2026-11-14",
+  previousPrivacyPath: "/privacy/2026-11-14",
+} as const;
+
 export const SITE = {
   appName: "포메",
   appNameKo: "Pome",
