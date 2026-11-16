@@ -34,13 +34,14 @@ export const BUSINESS = {
 /**
  * 2026년 11월 23일 시행 약관·방침 개정의 날짜와 주소
  *
- * 공지 기간에는 `/terms`·`/privacy`가 지금 판을 보여 주고, 새 판은 시행일 주소에 따로 둔다.
- * 시행일에 `/terms`·`/privacy`의 본문을 새 판으로 바꾸고 머리말 위의 개정 안내를 뺀다.
+ * 새 판은 시행일 주소에 따로 두고, `/terms`·`/privacy`는 effectiveAt 전까지 지금 판을, 그 뒤에는 새 판을 보여 준다.
  * noticeDate는 공지 페이지를 실제로 게시한 날이어야 하고, 시행일보다 7일 이상 앞서야 한다.
  */
 export const LEGAL_REVISION = {
   noticeDate: "2026년 11월 16일",
   effectiveDate: "2026년 11월 23일",
+  // 판을 고르는 기준 시각이다. 시간대(+09:00)를 빼면 서버가 UTC로 읽어 9시간 늦게 바뀐다
+  effectiveAt: "2026-11-23T00:00:00+09:00",
   previousEffectiveDate: "2026년 11월 14일",
   previousLastDate: "2026년 11월 22일",
   noticePath: "/notice/2026-11-23",

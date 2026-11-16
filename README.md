@@ -25,6 +25,7 @@ cp .env.example .env.local   # 값을 채운 뒤 dev 재시작
 | `npm run build` | 프로덕션 빌드 |
 | `npm run start` | 빌드 결과 서빙 |
 | `npm run lint` | ESLint |
+| `npm test` | 약관·방침 판 전환 시각 검사 (`scripts/*.test.mjs`, Node 22.6 이상) |
 
 ## 구조
 
