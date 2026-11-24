@@ -2,8 +2,8 @@ import type { Metadata } from "next";
 import { LegalPage, NoticeLink } from "@/components/legal/LegalDocument";
 import { isRevisionInEffect } from "@/lib/legal-revision";
 import { LEGAL_REVISION, OG_COMMON, SITE } from "@/lib/site";
-import { Privacy20261114 } from "./_versions/2026-11-14";
 import { Privacy20261123 } from "./_versions/2026-11-23";
+import { Privacy20261224 } from "./_versions/2026-12-24";
 
 export const metadata: Metadata = {
   title: "개인정보처리방침",
@@ -25,7 +25,7 @@ export default function PrivacyPage() {
         dateLine={`시행일: ${LEGAL_REVISION.effectiveDate}`}
         footerLinks={FOOTER_LINKS}
       >
-        <Privacy20261123 />
+        <Privacy20261224 />
       </LegalPage>
     );
   }
@@ -42,7 +42,7 @@ export default function PrivacyPage() {
       }
       footerLinks={FOOTER_LINKS}
     >
-      <Privacy20261114 />
+      <Privacy20261123 />
     </LegalPage>
   );
 }

@@ -1,13 +1,13 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { LegalPage } from "@/components/legal/LegalDocument";
-import { LEGAL_REVISION, OG_COMMON, SITE } from "@/lib/site";
+import { LEGAL_REVISION_20261123, OG_COMMON, SITE } from "@/lib/site";
 
 export const metadata: Metadata = {
   title: "이용약관과 개인정보처리방침 개정 안내",
-  description: `${LEGAL_REVISION.effectiveDate}부터 포인트, 결제, 보상형 광고에 관한 내용이 이용약관과 개인정보처리방침에 더해집니다.`,
-  alternates: { canonical: LEGAL_REVISION.noticePath },
-  openGraph: { ...OG_COMMON, url: LEGAL_REVISION.noticePath },
+  description: `${LEGAL_REVISION_20261123.effectiveDate}부터 포인트, 결제, 보상형 광고에 관한 내용이 이용약관과 개인정보처리방침에 더해집니다.`,
+  alternates: { canonical: LEGAL_REVISION_20261123.noticePath },
+  openGraph: { ...OG_COMMON, url: LEGAL_REVISION_20261123.noticePath },
 };
 
 type Change = { clause: string; before: string; after: string };
@@ -211,11 +211,11 @@ export default function LegalRevisionNoticePage() {
   return (
     <LegalPage
       title="이용약관과 개인정보처리방침 개정 안내"
-      dateLine={`공지일: ${LEGAL_REVISION.noticeDate} · 시행일: ${LEGAL_REVISION.effectiveDate}`}
+      dateLine={`공지일: ${LEGAL_REVISION_20261123.noticeDate} · 시행일: ${LEGAL_REVISION_20261123.effectiveDate}`}
       footerLinks={[
         { href: "/", label: `${SITE.appName} 홈으로` },
-        { href: LEGAL_REVISION.termsPath, label: "바뀐 이용약관" },
-        { href: LEGAL_REVISION.privacyPath, label: "바뀐 개인정보처리방침" },
+        { href: LEGAL_REVISION_20261123.termsPath, label: "바뀐 이용약관" },
+        { href: LEGAL_REVISION_20261123.privacyPath, label: "바뀐 개인정보처리방침" },
       ]}
     >
       <Section title="바뀌는 이유">
@@ -225,14 +225,14 @@ export default function LegalRevisionNoticePage() {
           기본 기능은 지금처럼 무료입니다.
         </p>
         <p>
-          바뀐 약관과 방침은 {LEGAL_REVISION.effectiveDate}부터 적용되며, 그
-          전까지는 {LEGAL_REVISION.previousEffectiveDate}에 시행한 약관과 방침이
+          바뀐 약관과 방침은 {LEGAL_REVISION_20261123.effectiveDate}부터 적용되며, 그
+          전까지는 {LEGAL_REVISION_20261123.previousEffectiveDate}에 시행한 약관과 방침이
           적용됩니다.
         </p>
       </Section>
 
       <p className="rounded-lg border border-zinc-200 bg-zinc-50 p-4 text-[15px] font-medium leading-relaxed text-zinc-800 dark:border-zinc-800 dark:bg-zinc-900 dark:text-zinc-200">
-        시행일인 {LEGAL_REVISION.effectiveDate}까지 거부 의사를 밝히지 않고
+        시행일인 {LEGAL_REVISION_20261123.effectiveDate}까지 거부 의사를 밝히지 않고
         서비스를 계속 이용하면 바뀐 이용약관과 개인정보처리방침에 동의한 것으로
         봅니다.
       </p>
@@ -256,34 +256,34 @@ export default function LegalRevisionNoticePage() {
         <ul className="list-disc space-y-1.5 pl-5">
           <li>
             <Link
-              href={LEGAL_REVISION.termsPath}
+              href={LEGAL_REVISION_20261123.termsPath}
               className="underline underline-offset-4"
             >
-              바뀐 이용약관 ({LEGAL_REVISION.effectiveDate} 시행)
+              바뀐 이용약관 ({LEGAL_REVISION_20261123.effectiveDate} 시행)
             </Link>
           </li>
           <li>
             <Link
-              href={LEGAL_REVISION.privacyPath}
+              href={LEGAL_REVISION_20261123.privacyPath}
               className="underline underline-offset-4"
             >
-              바뀐 개인정보처리방침 ({LEGAL_REVISION.effectiveDate} 시행)
+              바뀐 개인정보처리방침 ({LEGAL_REVISION_20261123.effectiveDate} 시행)
             </Link>
           </li>
           <li>
             <Link
-              href={LEGAL_REVISION.previousTermsPath}
+              href={LEGAL_REVISION_20261123.previousTermsPath}
               className="underline underline-offset-4"
             >
-              바뀌기 전 이용약관 ({LEGAL_REVISION.previousEffectiveDate} 시행)
+              바뀌기 전 이용약관 ({LEGAL_REVISION_20261123.previousEffectiveDate} 시행)
             </Link>
           </li>
           <li>
             <Link
-              href={LEGAL_REVISION.previousPrivacyPath}
+              href={LEGAL_REVISION_20261123.previousPrivacyPath}
               className="underline underline-offset-4"
             >
-              바뀌기 전 개인정보처리방침 ({LEGAL_REVISION.previousEffectiveDate}{" "}
+              바뀌기 전 개인정보처리방침 ({LEGAL_REVISION_20261123.previousEffectiveDate}{" "}
               시행)
             </Link>
           </li>

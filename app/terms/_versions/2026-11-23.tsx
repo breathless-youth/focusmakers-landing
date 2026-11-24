@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { Article, BusinessInfoTable } from "@/components/legal/LegalDocument";
-import { LEGAL_REVISION, SITE } from "@/lib/site";
+import { LEGAL_REVISION_20261123, SITE } from "@/lib/site";
 
 /**
  * 이용약관 본문 (2026년 11월 23일 시행판)
@@ -442,7 +442,7 @@ export function Terms20261123() {
         <p>
           팀은 관련 법령과{" "}
           <Link
-            href={LEGAL_REVISION.privacyPath}
+            href={LEGAL_REVISION_20261123.privacyPath}
             className="underline underline-offset-4"
           >
             개인정보처리방침
