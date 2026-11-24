@@ -43,3 +43,8 @@ export function trackStoreOpen(location: CtaLocation, platform: Platform) {
     location,
   });
 }
+
+/** 기관용 랜딩의 무료 시범 운영 신청 완료. segment 는 lib/b2b.ts 의 업종 id */
+export function trackB2bApply(segment: string) {
+  track("b2b_pilot_apply", { segment });
+}
