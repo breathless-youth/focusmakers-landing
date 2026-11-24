@@ -34,10 +34,10 @@ export const BUSINESS = {
 /**
  * 2026년 11월 23일 시행 약관·방침 개정의 날짜와 주소
  *
- * 새 판은 시행일 주소에 따로 두고, `/terms`·`/privacy`는 effectiveAt 전까지 지금 판을, 그 뒤에는 새 판을 보여 준다.
- * noticeDate는 공지 페이지를 실제로 게시한 날이어야 하고, 시행일보다 7일 이상 앞서야 한다.
+ * 이미 시행한 개정이라 값을 고치지 않는다.
+ * 그때의 공지 페이지와 이전 판 페이지가 이 값을 읽는다.
  */
-export const LEGAL_REVISION = {
+export const LEGAL_REVISION_20261123 = {
   noticeDate: "2026년 11월 16일",
   effectiveDate: "2026년 11월 23일",
   // 판을 고르는 기준 시각이다. 시간대(+09:00)를 빼면 서버가 UTC로 읽어 9시간 늦게 바뀐다
@@ -49,6 +49,27 @@ export const LEGAL_REVISION = {
   privacyPath: "/privacy/2026-11-23",
   previousTermsPath: "/terms/2026-11-14",
   previousPrivacyPath: "/privacy/2026-11-14",
+} as const;
+
+/**
+ * 2026년 12월 24일 시행 약관·방침 개정의 날짜와 주소
+ *
+ * 새 판은 시행일 주소에 따로 두고, `/terms`·`/privacy`는 effectiveAt 전까지 지금 판을, 그 뒤에는 새 판을 보여 준다.
+ * noticeDate는 공지 페이지를 실제로 게시한 날이어야 한다.
+ * 이용자에게 불리한 변경이라 시행일보다 30일 이상 앞서야 한다.
+ */
+export const LEGAL_REVISION = {
+  noticeDate: "2026년 11월 24일",
+  effectiveDate: "2026년 12월 24일",
+  // 판을 고르는 기준 시각이다. 시간대(+09:00)를 빼면 서버가 UTC로 읽어 9시간 늦게 바뀐다
+  effectiveAt: "2026-12-24T00:00:00+09:00",
+  previousEffectiveDate: "2026년 11월 23일",
+  previousLastDate: "2026년 12월 23일",
+  noticePath: "/notice/2026-12-24",
+  termsPath: "/terms/2026-12-24",
+  privacyPath: "/privacy/2026-12-24",
+  previousTermsPath: "/terms/2026-11-23",
+  previousPrivacyPath: "/privacy/2026-11-23",
 } as const;
 
 export const SITE = {

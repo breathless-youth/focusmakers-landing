@@ -2,8 +2,8 @@ import type { Metadata } from "next";
 import { LegalPage, NoticeLink } from "@/components/legal/LegalDocument";
 import { isRevisionInEffect } from "@/lib/legal-revision";
 import { LEGAL_REVISION, OG_COMMON, SITE } from "@/lib/site";
-import { Terms20261114 } from "./_versions/2026-11-14";
 import { Terms20261123 } from "./_versions/2026-11-23";
+import { Terms20261224 } from "./_versions/2026-12-24";
 
 export const metadata: Metadata = {
   title: "이용약관",
@@ -28,7 +28,7 @@ export default function TermsPage() {
         dateLine={`시행일: ${LEGAL_REVISION.effectiveDate}`}
         footerLinks={FOOTER_LINKS}
       >
-        <Terms20261123 />
+        <Terms20261224 />
       </LegalPage>
     );
   }
@@ -45,7 +45,7 @@ export default function TermsPage() {
       }
       footerLinks={FOOTER_LINKS}
     >
-      <Terms20261114 />
+      <Terms20261123 />
     </LegalPage>
   );
 }

@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { Clause, Table } from "@/components/legal/LegalDocument";
-import { BUSINESS, LEGAL_REVISION, SITE } from "@/lib/site";
+import { BUSINESS, LEGAL_REVISION_20261123, SITE } from "@/lib/site";
 
 /**
  * 개인정보처리방침 본문 (2026년 11월 23일 시행판)
@@ -795,7 +795,7 @@ export function Privacy20261123() {
           변경을 알릴 때에는 변경 전 내용과 변경 후 내용을 비교하여 보여 줍니다.
           이전 방침과 각 방침의 적용 기간은{" "}
           <Link
-            href={LEGAL_REVISION.previousPrivacyPath}
+            href={LEGAL_REVISION_20261123.previousPrivacyPath}
             className="underline underline-offset-2"
           >
             이전 방침 페이지
