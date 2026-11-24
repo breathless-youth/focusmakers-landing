@@ -35,7 +35,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   if (!s) return {};
   const path = `/for/${s.id}`;
   return {
-    title: `${s.name} 기관용 포메`,
+    // 사이트 공통 제목 틀이 뒤에 다른 서비스 표기를 붙이지 않도록 통째로 정한다
+    title: { absolute: `${s.name} 기관용 | 포커스 메이커스` },
     description: s.description,
     alternates: { canonical: path },
     openGraph: { ...OG_COMMON, url: path },
@@ -68,7 +69,7 @@ export default async function B2bPage({ params }: Props) {
       <header className="b2b-top">
         <div className="b2b-top-in">
           <Link href="/" className="b2b-brand">
-            포메<span>기관용</span>
+            포커스 메이커스<span>기관용</span>
           </Link>
           <a href="#apply" className="btn btn-primary btn-sm">
             무료 시범 신청
@@ -183,7 +184,7 @@ export default async function B2bPage({ params }: Props) {
 
         <footer className="biz">
           <div className="biz-links">
-            <b>포메(FocusMakers)</b>
+            <b>포커스 메이커스(FocusMakers)</b>
             <Link href="/terms">이용약관</Link>
             <Link href={SITE.privacyPath}>개인정보처리방침</Link>
             <a href={`mailto:${SITE.supportEmail}`}>문의</a>
