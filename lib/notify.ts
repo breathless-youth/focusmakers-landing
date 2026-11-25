@@ -37,7 +37,7 @@ export async function notifySignup(input: {
   }
 }
 
-/** 기관용 랜딩에서 20분 미팅 신청이 들어오면 알린다. 실패해도 접수는 막지 않는다 */
+/** 기관용 랜딩에서 도입 문의가 들어오면 알린다. 실패해도 접수는 막지 않는다 */
 export async function notifyB2bLead(input: {
   segment: string;
   organization: string;
@@ -56,7 +56,7 @@ export async function notifyB2bLead(input: {
       method: "POST",
       headers: { "content-type": "application/json" },
       body: JSON.stringify({
-        text: `기관 미팅 신청 [${input.segment}] ${input.organization}${size} · ${input.contact}${campaign}`,
+        text: `기관 도입 문의 [${input.segment}] ${input.organization}${size} · ${input.contact}${campaign}`,
       }),
       signal: AbortSignal.timeout(3000),
     });

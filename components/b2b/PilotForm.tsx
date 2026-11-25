@@ -4,7 +4,7 @@ import { useState, type FormEvent } from "react";
 import { trackB2bApply } from "@/lib/analytics";
 
 /**
- * 20분 미팅 신청 폼. /api/b2b/apply 로 보낸다.
+ * 도입 문의 폼. /api/b2b/apply 로 보낸다.
  * 메일 링크에 붙인 utm_* 값을 함께 보내 어느 업종·어느 메일에서 온 신청인지 남긴다.
  */
 
@@ -69,7 +69,7 @@ export function PilotForm({
   if (status.kind === "ok") {
     return (
       <p className="form-msg ok" role="status">
-        미팅 신청이 접수됐어요. 영업일 기준 이틀 안에 남겨 주신 연락처로 일정을 여쭙겠습니다.
+        문의가 접수됐어요. 영업일 기준 이틀 안에 남겨 주신 연락처로 연락드리겠습니다.
       </p>
     );
   }
@@ -95,7 +95,7 @@ export function PilotForm({
           <input name="contact" placeholder="담당자 연락처" required maxLength={100} />
         </label>
         <button className="btn btn-primary" type="submit" disabled={status.kind === "sending"}>
-          {status.kind === "sending" ? "보내는 중" : "20분 미팅 신청"}
+          {status.kind === "sending" ? "보내는 중" : "도입 문의하기"}
         </button>
       </div>
       <label className="consent">

@@ -30,8 +30,8 @@ test("모든 업종은 미팅, 화면 정하기, 직접 써 보기 순서의 3�
   }
 });
 
-test("첫 화면 버튼은 미팅 요청으로 통일한다", () => {
-  for (const s of SEGMENTS) assert.equal(s.hero.cta, "20분 이야기 나누기", s.id);
+test("첫 화면 버튼은 도입 문의로 통일한다", () => {
+  for (const s of SEGMENTS) assert.equal(s.hero.cta, "도입 문의", s.id);
 });
 
 test("2주 무료 운영을 약속하지 않는다", () => {

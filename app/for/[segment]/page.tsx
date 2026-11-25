@@ -71,7 +71,7 @@ export default async function B2bPage({ params }: Props) {
             포커스 메이커스<span>기관용</span>
           </Link>
           <a href="#apply" className="btn btn-primary btn-sm">
-            20분 미팅 신청
+            도입 문의
           </a>
         </div>
       </header>
@@ -162,7 +162,7 @@ export default async function B2bPage({ params }: Props) {
         </section>
 
         <section className="apply" id="apply">
-          <h2>20분 미팅 신청</h2>
+          <h2>도입 문의</h2>
           <PilotForm
             segment={s.id}
             orgLabel={s.form.orgLabel}

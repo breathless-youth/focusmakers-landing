@@ -44,7 +44,7 @@ export function trackStoreOpen(location: CtaLocation, platform: Platform) {
   });
 }
 
-/** 기관용 랜딩의 20분 미팅 신청 완료. 이벤트 이름은 이미 쌓인 데이터와 이어 보려고 그대로 둔다 */
+/** 기관용 랜딩의 도입 문의 완료. 이벤트 이름은 이미 쌓인 데이터와 이어 보려고 그대로 둔다 */
 export function trackB2bApply(segment: string) {
   track("b2b_pilot_apply", { segment });
 }
