@@ -267,7 +267,8 @@
     font-size: 22px;
     font-weight: 700;
   }
-  & .sec .lead {
+  & .sec .lead,
+  & .steps .lead {
     color: var(--muted);
     max-width: 60ch;
   }

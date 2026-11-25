@@ -20,8 +20,23 @@ test("모든 업종은 출처가 달린 근거 3개로 시작한다", () => {
   }
 });
 
-test("모든 업종은 시범 운영 3단계를 갖는다", () => {
-  for (const s of SEGMENTS) assert.equal(s.steps.length, 3, s.id);
+test("모든 업종은 미팅, 화면 정하기, 직접 써 보기 순서의 3단계를 갖는다", () => {
+  for (const s of SEGMENTS) {
+    assert.deepEqual(
+      s.steps.map(([title]) => title),
+      ["20분 미팅", "필요한 화면 함께 정하기", "원하시면 시범 운영"],
+      s.id,
+    );
+  }
+});
+
+test("첫 화면 버튼은 미팅 요청으로 통일한다", () => {
+  for (const s of SEGMENTS) assert.equal(s.hero.cta, "20분 이야기 나누기", s.id);
+});
+
+test("2주 무료 운영을 약속하지 않는다", () => {
+  // 기관용 기능이 아직 없어 당장 운영을 약속할 수 없다
+  assert.doesNotMatch(JSON.stringify(SEGMENTS), /2주 (무료|동안)|무료 (시범|운영)/);
 });
 
 test("영상이 서버로 전송되지 않는다고 쓰지 않는다", () => {

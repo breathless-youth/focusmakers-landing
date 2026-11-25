@@ -71,7 +71,7 @@ export default async function B2bPage({ params }: Props) {
             포커스 메이커스<span>기관용</span>
           </Link>
           <a href="#apply" className="btn btn-primary btn-sm">
-            무료 시범 신청
+            20분 미팅 신청
           </a>
         </div>
       </header>
@@ -95,7 +95,7 @@ export default async function B2bPage({ params }: Props) {
                 {s.hero.cta}
               </a>
               <a href="#pilot" className="btn btn-ghost">
-                시범 운영 방법 보기
+                진행 방법 보기
               </a>
             </div>
           </div>
@@ -107,8 +107,9 @@ export default async function B2bPage({ params }: Props) {
         ))}
 
         <section className="steps" id="pilot">
-          <span className="tag">비용 없이 시작</span>
-          <h2>2주 무료 시범 운영은 이렇게 진행돼요</h2>
+          <span className="tag">함께 만들 기관을 찾습니다</span>
+          <h2>이렇게 진행돼요</h2>
+          <p className="lead">기관용 표와 현황 화면은 지금 만들고 있고, 이 페이지의 화면은 예시입니다.</p>
           <div className="grid-3">
             {s.steps.map(([title, body], i) => (
               <div className="step" key={title}>
@@ -119,8 +120,7 @@ export default async function B2bPage({ params }: Props) {
             ))}
           </div>
           <p className="after">
-            2주 동안은 비용이 없습니다. 끝난 뒤 계속 쓸지, 어떤 조건으로 쓸지는 결과를 함께 보고
-            정합니다.
+            미팅과 시범 운영에는 비용이 없습니다. 계속 쓸지와 조건은 시범 결과를 함께 보고 정합니다.
           </p>
         </section>
 
@@ -162,7 +162,7 @@ export default async function B2bPage({ params }: Props) {
         </section>
 
         <section className="apply" id="apply">
-          <h2>2주 무료 시범 운영 신청</h2>
+          <h2>20분 미팅 신청</h2>
           <PilotForm
             segment={s.id}
             orgLabel={s.form.orgLabel}

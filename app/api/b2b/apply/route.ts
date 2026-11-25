@@ -5,7 +5,7 @@ import { clientIp, rateLimit } from "@/lib/rate-limit";
 import { supabaseAdmin } from "@/lib/supabase-admin";
 
 /**
- * 기관용 랜딩의 무료 시범 운영 신청 접수.
+ * 기관용 랜딩의 20분 미팅 신청 접수.
  *
  * 베타 신청 라우트와 같은 이유로 브라우저가 DB에 직접 쓰지 않는다 —
  * 서버에서 값을 다시 검증하고, IP 레이트리밋을 걸고, secret 키를 숨긴다.
