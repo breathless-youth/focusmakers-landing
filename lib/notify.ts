@@ -36,3 +36,31 @@ export async function notifySignup(input: {
     // 알림 실패는 신청 접수에 영향을 주지 않는다
   }
 }
+
+/** 기관용 랜딩에서 20분 미팅 신청이 들어오면 알린다. 실패해도 접수는 막지 않는다 */
+export async function notifyB2bLead(input: {
+  segment: string;
+  organization: string;
+  headcount: string | null;
+  contact: string;
+  utm_campaign: string | null;
+}) {
+  const webhook = process.env.SLACK_WEBHOOK_URL;
+  if (!webhook) return;
+
+  const size = input.headcount ? ` · ${input.headcount}` : "";
+  const campaign = input.utm_campaign ? ` · ${input.utm_campaign}` : "";
+
+  try {
+    await fetch(webhook, {
+      method: "POST",
+      headers: { "content-type": "application/json" },
+      body: JSON.stringify({
+        text: `기관 미팅 신청 [${input.segment}] ${input.organization}${size} · ${input.contact}${campaign}`,
+      }),
+      signal: AbortSignal.timeout(3000),
+    });
+  } catch {
+    // 알림 실패는 신청 접수에 영향을 주지 않는다
+  }
+}
