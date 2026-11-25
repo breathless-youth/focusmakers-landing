@@ -1137,32 +1137,20 @@ export function findSegment(id: string): Segment | undefined {
 }
 
 /**
- * 팀 소개. facts와 reviews는 값이 채워진 것만 화면에 나온다 —
- * 확인되지 않은 숫자나 지어낸 리뷰를 운영 페이지에 싣지 않으려고 비워 둔 채로 시작한다.
+ * 앱 소개. 숫자와 리뷰는 확인한 값만 싣는다.
  */
 export const B2B_TEAM: {
-  h: string;
-  p: string;
-  badges: string[];
+  h: string[];
   facts: { value: string; label: string }[];
   reviews: { store: "App Store" | "Google Play"; text: string; by: string }[];
 } = {
-  h: "포커스 메이커스를 만드는 팀입니다",
-  p: "카메라로 공부 상태를 알아보는 AI 공부 타이머 포커스 메이커스를 만듭니다. 혼자 공부하는 사람이 끝까지 해내도록 돕는 것이 목표이고, 이제 그 경험을 함께 공부하고 일하는 곳으로 넓히려 합니다.",
-  badges: [
-    "AI·SW 마에스트로 17기",
-    "App Store · Google Play 출시",
-    "사업자등록 완료",
-    "통신판매업 신고 완료",
-  ],
+  h: ["이미 많은 분이 포커스 메이커스로", "공부하고 있습니다"],
   facts: [
     { value: "5,000+", label: "누적 다운로드" },
-    // 운영 DB의 끝난 공부 세션 순공 시간 합계에서 팀 테스트 계정을 뺀 값(2026-11-24, 약 3,840시간)
-    { value: "3,800시간+", label: "누적 순공 시간" },
-    { value: "5.0", label: "App Store 평점" },
-    { value: "4.8", label: "Google Play 평점" },
+    // 운영 DB의 끝난 공부 세션 순공 시간 합계에서 팀 테스트 계정을 뺀 값(2026-11-25, 약 4,176시간)
+    { value: "4,100시간+", label: "누적 순공 시간" },
   ],
-  // App Store에 올라온 리뷰에서 문장을 그대로 옮겼다(일부 발췌). 고쳐 쓰지 않는다
+  // 스토어에 올라온 리뷰에서 문장을 그대로 옮겼다(일부 발췌). 고쳐 쓰지 않는다
   reviews: [
     {
       store: "App Store",
@@ -1170,9 +1158,19 @@ export const B2B_TEAM: {
       by: "2026.10",
     },
     {
+      store: "Google Play",
+      text: "이거 쓰면서 순공 시간 많이 늘었습니다 진짜로...! 덕분에 자격증 시험도 합격했습니다!",
+      by: "2026.11",
+    },
+    {
       store: "App Store",
       text: "사용하기도 쉽고 순공 잘잡아줘서 친구들이랑 잘 쓰고 있어요!!",
       by: "2026.11",
+    },
+    {
+      store: "Google Play",
+      text: "요즘 매일 친구랑 누가 더 오래 공부하나 경쟁하고 있습니다 ㅎㅎ",
+      by: "2026.10",
     },
     {
       store: "App Store",
@@ -1180,9 +1178,19 @@ export const B2B_TEAM: {
       by: "2026.10",
     },
     {
+      store: "Google Play",
+      text: "다른 앱이랑 다르게 못 잰 공부 시간을 나중에 넣을 수 있어서 좋아요",
+      by: "2026.10",
+    },
+    {
       store: "App Store",
       text: "공부 집중 잘못했었는데 이 어플 쓰고나서 공부 집중 진짜 잘되요",
       by: "2026.10",
+    },
+    {
+      store: "Google Play",
+      text: "한 번 써봤는데 집중 잘되고 좋아요~! 잘 쓰겠습니다.",
+      by: "2026.11",
     },
   ],
 };

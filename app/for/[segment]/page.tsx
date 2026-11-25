@@ -1,6 +1,9 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import appIcon from "@/app/icon.png";
+import { CountUp } from "@/components/b2b/CountUp";
 import { HeroVisualCard, SectionView } from "@/components/b2b/Sections";
 import { PilotForm } from "@/components/b2b/PilotForm";
 import {
@@ -49,7 +52,6 @@ const BUSINESS_ROWS: [string, string][] = [
   ["대표자", BUSINESS.representative],
   ["사업자등록번호", BUSINESS.registrationNumber],
   ["통신판매업 신고번호", BUSINESS.mailOrderNumber],
-  ["주소", BUSINESS.address],
   ["문의", SITE.supportEmail],
 ];
 
@@ -58,11 +60,8 @@ export default async function B2bPage({ params }: Props) {
   const s = findSegment(segment);
   if (!s) notFound();
 
-  // 리뷰가 적을 때 두 줄로 나누면 줄마다 카드가 모자라 흐름이 끊겨 보인다
-  const reviewRows =
-    B2B_TEAM.reviews.length > 6
-      ? [0, 1].map((k) => B2B_TEAM.reviews.filter((_, i) => i % 2 === k))
-      : [B2B_TEAM.reviews];
+  // 리뷰 카드를 두 줄로 나눠 서로 반대로 흐르게 한다
+  const reviewRows = [0, 1].map((k) => B2B_TEAM.reviews.filter((_, i) => i % 2 === k));
 
   return (
     <div className="b2b">
@@ -125,49 +124,41 @@ export default async function B2bPage({ params }: Props) {
           </p>
         </section>
 
-        <section className="team">
-          <span className="tag">만드는 사람들</span>
-          <h2>{B2B_TEAM.h}</h2>
-          <p>{B2B_TEAM.p}</p>
-          <div className="badges">
-            {B2B_TEAM.badges.map((badge) => (
-              <span key={badge}>{badge}</span>
+        <section className="app-proof">
+          <Image src={appIcon} alt="" width={64} height={64} className="app-ic" />
+          <h2>
+            {B2B_TEAM.h.map((line) => (
+              <span key={line}>{line}</span>
+            ))}
+          </h2>
+          <div className="app-stats">
+            {B2B_TEAM.facts.map((fact) => (
+              <div key={fact.label}>
+                <b>
+                  <CountUp value={fact.value} />
+                </b>
+                <span>{fact.label}</span>
+              </div>
             ))}
           </div>
-          {B2B_TEAM.facts.length > 0 && (
-            <div className="facts">
-              {B2B_TEAM.facts.map((fact) => (
-                <div key={fact.label}>
-                  <b>{fact.value}</b>
-                  <span>{fact.label}</span>
-                </div>
-              ))}
-            </div>
-          )}
-          {B2B_TEAM.reviews.length > 0 && (
-            <div className="reviews">
-              <span className="tag">사용자 리뷰</span>
-              {reviewRows.map((row, k) => (
-                <div className="marquee" key={k}>
-                  <div className={k ? "track rev" : "track"}>
-                    {/* 끊김 없이 흐르도록 같은 묶음을 두 번 잇는다. 뒤 묶음은 읽기 도구에서 숨긴다 */}
-                    {[...row, ...row].map((review, i) => (
-                      <div className="rv" key={i} aria-hidden={i >= row.length}>
-                        <span className="stars" aria-label="별점 5점">
-                          ★★★★★
-                        </span>
-                        <p>{review.text}</p>
-                        <div className="by">
-                          <span>{review.by}</span>
-                          <span>{review.store}</span>
-                        </div>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              ))}
-            </div>
-          )}
+          <div className="rv-rows">
+            {reviewRows.map((row, k) => (
+              <div className={k ? "rv-track rev" : "rv-track"} key={k}>
+                {/* 끊김 없이 흐르도록 같은 묶음을 네 번 잇는다. 첫 묶음 말고는 읽기 도구에서 숨긴다 */}
+                {[...row, ...row, ...row, ...row].map((review, i) => (
+                  <blockquote className="rv-card" key={i} aria-hidden={i >= row.length}>
+                    <span className="stars" aria-label="별점 5점">
+                      ★★★★★
+                    </span>
+                    <span className="m">
+                      {review.store}, {review.by}
+                    </span>
+                    <p>{review.text}</p>
+                  </blockquote>
+                ))}
+              </div>
+            ))}
+          </div>
         </section>
 
         <section className="apply" id="apply">
