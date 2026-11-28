@@ -16,10 +16,10 @@ import { StoreLink } from "./StoreLink";
  * 렌더가 어긋나지 않고, effect 에서 setState 하지 않아도 된다.
  */
 
-const CLASS =
-  "flex h-[38px] items-center rounded-[13px] bg-[#1B64DA] px-3 text-[13.5px] font-bold whitespace-nowrap text-white transition-colors hover:bg-[#1957C2] active:scale-[.97] md:h-[42px] md:px-[18px] md:text-[14.5px]";
+/** 모양은 app/landing.css의 위 막대 규칙이 정한다 */
+const CLASS = "pill";
 
-const LABEL = "앱 다운로드";
+const LABEL = "앱 받기";
 
 /** UA는 세션 중에 바뀌지 않으므로 구독할 것이 없다 */
 const noopSubscribe = () => () => {};
