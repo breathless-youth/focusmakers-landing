@@ -2,7 +2,7 @@ import type { CtaLocation } from "@/lib/analytics";
 import { StoreLink } from "./StoreLink";
 
 /**
- * App Store · Google Play 배지 한 쌍 — 히어로와 다운로드 섹션이 같이 쓴다.
+ * App Store · Google Play 배지 한 쌍 — 첫 화면과 마지막 구간이 같이 쓴다.
  * 기기를 가리지 않고 둘 다 보여주므로 기기 감지에 기대지 않는다.
  */
 
@@ -26,9 +26,20 @@ const STORES = [
   },
 ] as const;
 
-export function StoreBadges({ location }: { location: CtaLocation }) {
+export function StoreBadges({
+  location,
+  align = "center",
+}: {
+  location: CtaLocation;
+  /** 첫 화면은 글이 왼쪽 정렬이라 배지도 왼쪽에 붙인다 */
+  align?: "center" | "start";
+}) {
   return (
-    <div className="flex flex-wrap justify-center gap-3">
+    <div
+      className={`flex flex-wrap gap-3 ${
+        align === "start" ? "justify-start" : "justify-center"
+      }`}
+    >
       {STORES.map(({ platform, viewBox, logo, caption, name }) => (
         <StoreLink
           key={platform}

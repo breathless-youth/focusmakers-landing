@@ -2,8 +2,9 @@
 
 포메(FocusMakers) 서비스 랜딩 페이지. Next.js App Router + Tailwind CSS v4.
 
-Claude Design 프로젝트 [FocusMakers Landing v3](https://claude.ai/design/p/cc6d01ad-890c-4187-9d57-1609e5fb3090?file=FocusMakers+Landing+v3.dc.html)
-시안을 구현한 것으로, 카피·수치·모션 값은 시안 기준이다.
+메인 랜딩은 2026년 11월 개편안(AI 타이머 · 몰입 환경 · 같이 공부)을 구현한 것이다.
+구간 문구는 `app/page.tsx`, 캐릭터·리뷰·별점 같은 내용은 `lib/landing.ts`,
+스타일은 `app/landing.css`에 있다.
 
 ## 실행
 
@@ -31,12 +32,15 @@ cp .env.example .env.local   # 값을 채운 뒤 dev 재시작
 
 ```
 app/
-  page.tsx            랜딩 (서버 컴포넌트, 섹션 조립)
+  page.tsx            랜딩 (서버 컴포넌트, 구간 조립과 문구)
+  landing.css         랜딩 전용 스타일 (모든 규칙이 .lp 아래에 있다)
   api/beta/signup/    Android 베타 신청 접수 (랜딩 폼은 내림, API 만 남음)
   privacy · terms · support
-components/landing-v2/  랜딩 전용 컴포넌트 (목업·스토어 링크·아코디언 등)
+components/landing/     랜딩 구간 컴포넌트 (캐릭터·타임테이블·배경음·공부방 등)
+components/landing-v2/  스토어 링크·FAQ 아코디언처럼 개편 전부터 쓰던 컴포넌트
 lib/
-  beta.tsx            섹션 카피와 스토어 버튼 문구
+  landing.ts          랜딩 내용 (캐릭터·리뷰·별점·공부방·타임테이블 예시)
+  beta.tsx            FAQ와 스토어 플랫폼 타입
   site.ts             서비스 상수 (도메인·문의처·스토어 주소)
   supabase-admin.ts   서버 전용 Supabase 클라이언트
   notify.ts           Slack 알림
@@ -44,9 +48,10 @@ lib/
 supabase/migrations/  DB 스키마
 ```
 
-기기 목업은 시안 좌표계(402×874pt)로 그린 뒤 컨테이너 폭에 맞춰 축소한다.
-덕분에 안쪽 수치를 앱 디자인에서 그대로 옮겨 쓸 수 있다 —
-`components/landing-v2/PhoneFrame.tsx` 참고.
+랜딩에 쓰는 그림·영상·음원은 `public/landing/`에 있다. 배경음 여섯 개는 앱에 실린
+CC0 음원과 같은 파일이고, 누른 것만 받아 온다.
+
+별점(`lib/landing.ts`의 `RATINGS`)과 리뷰는 스토어 화면에서 직접 확인한 값만 적는다.
 
 ## 스토어 링크
 
